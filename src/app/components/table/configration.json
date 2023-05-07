@@ -1,0 +1,30 @@
+[
+      {
+            "name": "50,000",
+            "path":"../../../assets/img/fifty.jpg"
+      },
+      {
+            "name": "25,000",
+            "path":"../../../assets/img/twentyfive.jpg"
+      },
+      {
+            "name": "10,000",
+            "path":"../../../assets/img/ten.jpg"
+      },
+      {
+            "name": "5,000",
+            "path":"../../../assets/img/five.jpg"
+      },
+      {
+            "name": "1000",
+            "path":"../../../assets/img/one.jpg"
+      },
+      {
+            "name": "500",
+            "path":"../../../assets/img/fife.jpg"
+      },
+      {
+            "name":"250",
+            "path":"../../../assets/img/two.jpg"
+      }
+]

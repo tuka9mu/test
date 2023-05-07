@@ -1,0 +1,21 @@
+label{
+      font-size: 12px;
+      font-weight: bold;
+      text-align: center;
+}
+input{
+      text-align: center;
+}
+
+td{
+      padding: 10px;
+}
+
+img{
+    width:100px;
+    margin: 0 auto;
+}
+
+th{
+  width:30px;
+}
