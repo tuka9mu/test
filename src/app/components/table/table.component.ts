@@ -3,6 +3,7 @@ import * as data from './configration.json';
 import { IDropdownSettings } from 'ng-multiselect-dropdown';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { FormControl, FormGroup, RequiredValidator, Validators } from '@angular/forms';
+import * as NoWorkResult from 'postcss/lib/no-work-result';
 
 export interface Cat {
       name: String;
@@ -19,9 +20,49 @@ export interface forin2 {
       name: String;
 }
 
+export interface IraqiCalculated {
+      cid: number;
+      value: number;
+}
 
+export interface IraqiUnCalculated{
+      cid:number;
+      value:number
+}
+export interface UnIraqiCalculated {
+      cid: number;
+      value: number;
+}
 
+export interface UnIraqiUnCalculated{
+      cid:number;
+      value:number
+}
+export interface Statement {
+      id:Number,
+      invoiceId:Number,
+      currencyId: Number,
+      userId:Number,
+      achieved:Number,
+      loss:Number,
+      forged: frod[],
+      IraqiCalculated:IraqiCalculated[],
+      IraqiUnCalculated:IraqiUnCalculated[],
+      UnIraqiCalculated:number,
+      UnIraqiUnCalculated:number,
+      unIraqiCalculated_Details:string,
+      unIraqiUnCalculated_Details:string,
+      extra:Number,
+      unacceptable:Number,
+      auger:Number,
+      buried:Number,
+      cashier:string,
+      notes:string,
+      // createdAt:Date,
+      // updatedAt:Date,
+      // isActive:boolean
 
+}
 
 @Component({
       selector: 'app-table',
@@ -35,7 +76,11 @@ export class TableComponent implements OnInit {
 
 	constructor(private modalService: NgbModal) {}
 
-listfrod:frod[]= [];
+      listfrod:frod[]= [];
+      listIraqiCalculated:IraqiCalculated[]=[];
+      listIraqiUnCalculated:IraqiUnCalculated[]=[];
+
+      all:Statement[] = [];
 
 	openXl(longContent: any) {
 		this.modalService.open(longContent, { size: 'xl' });
@@ -70,8 +115,8 @@ listfrod:frod[]= [];
 
             };
             this.formReactiveForms = new FormGroup({
-              achieved:new FormControl(null,Validators.required),
-              loss:new FormControl(null),
+              achieved:new FormControl([0,Validators.requiredTrue, Validators.pattern("^[0-9]*$"),Validators.min(0)]),
+              loss:new FormControl(null,Validators.required),
               forged:new FormGroup({
                   forged_50:new FormControl(null),
                   forged_25:new FormControl(null),
@@ -81,26 +126,26 @@ listfrod:frod[]= [];
                   forged_500:new FormControl(null),
                   forged_250:new FormControl(null),
               }),
-              unIraqiCalculated: new FormGroup({
-                unIraqiCalculated_50:new FormControl(null),
-                unIraqiCalculated_25:new FormControl(null),
-                unIraqiCalculated_10:new FormControl(null),
-                unIraqiCalculated_5:new FormControl(null),
-                unIraqiCalculated_1000:new FormControl(null),
-                unIraqiCalculated_500:new FormControl(null),
-                unIraqiCalculated_250:new FormControl(null),
+              IraqiCalculated: new FormGroup({
+                  IraqiCalculated_50:new FormControl(null),
+                  IraqiCalculated_25:new FormControl(null),
+                  IraqiCalculated_10:new FormControl(null),
+                  IraqiCalculated_5:new FormControl(null),
+                  IraqiCalculated_1000:new FormControl(null),
+                  IraqiCalculated_500:new FormControl(null),
+                  IraqiCalculated_250:new FormControl(null),
               }),
-              unIraqiUnCalculated: new FormGroup({
-                unIraqiUnCalculated_50:new FormControl(null),
-                unIraqiUnCalculated_25:new FormControl(null),
-                unIraqiUnCalculated_10:new FormControl(null),
-                unIraqiUnCalculated_5:new FormControl(null),
-                unIraqiUnCalculated_1000:new FormControl(null),
-                unIraqiUnCalculated_500:new FormControl(null),
-                unIraqiUnCalculated_250:new FormControl(null),
+              IraqiUnCalculated: new FormGroup({
+                  IraqiUnCalculated_50:new FormControl(null),
+                  IraqiUnCalculated_25:new FormControl(null),
+                  IraqiUnCalculated_10:new FormControl(null),
+                  IraqiUnCalculated_5:new FormControl(null),
+                  IraqiUnCalculated_1000:new FormControl(null),
+                  IraqiUnCalculated_500:new FormControl(null),
+                  IraqiUnCalculated_250:new FormControl(null),
               }),
-              CalculatedunIraqi: new FormControl(null),
-              UnCalculatedunIraqi: new FormControl(null),
+              UnIraqiCalculated: new FormControl(null),
+              UnIraqiUnCalculated: new FormControl(null),
               unIraqiCalculated_Details: new FormControl(null),
               unIraqiUnCalculated_Details: new FormControl(null),
               extra: new FormControl(null),
@@ -134,8 +179,55 @@ listfrod:frod[]= [];
             if(frodform.forged_1000>0)  this.listfrod.push({ cid: 5, value: frodform.forged_1000, })
             if(frodform.forged_500>0)  this.listfrod.push({ cid: 6, value: frodform.forged_500, })
             if(frodform.forged_250>0)  this.listfrod.push({ cid: 7, value: frodform.forged_250, })
+
+
+            let IraqiCalculatedform = this.formReactiveForms.value.IraqiCalculated;
+            this.listIraqiCalculated =[];
+            if (IraqiCalculatedform.IraqiCalculated_50) this.listIraqiCalculated.push({cid:1, value: IraqiCalculatedform.IraqiCalculated_50})
+            if (IraqiCalculatedform.IraqiCalculated_25) this.listIraqiCalculated.push({cid:2, value: IraqiCalculatedform.IraqiCalculated_25})
+            if (IraqiCalculatedform.IraqiCalculated_10) this.listIraqiCalculated.push({cid:3, value: IraqiCalculatedform.IraqiCalculated_10})
+            if (IraqiCalculatedform.IraqiCalculated_5) this.listIraqiCalculated.push({cid:4, value: IraqiCalculatedform.IraqiCalculated_5})
+            if (IraqiCalculatedform.IraqiCalculated_1000) this.listIraqiCalculated.push({cid:5, value: IraqiCalculatedform.IraqiCalculated_1000})
+            if (IraqiCalculatedform.IraqiCalculated_500) this.listIraqiCalculated.push({cid:6, value: IraqiCalculatedform.IraqiCalculated_500})
+            if (IraqiCalculatedform.IraqiCalculated_250) this.listIraqiCalculated.push({cid:7, value: IraqiCalculatedform.IraqiCalculated_250})
             
-            console.log(this.listfrod)
+            let IraqiUnCalculatedform = this.formReactiveForms.value.IraqiUnCalculated;
+            this.listIraqiUnCalculated =[];
+            if(IraqiUnCalculatedform.IraqiUnCalculated_50) this.listIraqiUnCalculated.push({cid:1,value:IraqiUnCalculatedform.IraqiUnCalculated_50})        
+            if(IraqiUnCalculatedform.IraqiUnCalculated_25) this.listIraqiUnCalculated.push({cid:2,value:IraqiUnCalculatedform.IraqiUnCalculated_25})
+            if(IraqiUnCalculatedform.IraqiUnCalculated_10) this.listIraqiUnCalculated.push({cid:3,value:IraqiUnCalculatedform.IraqiUnCalculated_10})
+            if(IraqiUnCalculatedform.IraqiUnCalculated_50) this.listIraqiUnCalculated.push({cid:4,value:IraqiUnCalculatedform.IraqiUnCalculated_5})        
+            if(IraqiUnCalculatedform.IraqiUnCalculated_50) this.listIraqiUnCalculated.push({cid:5,value:IraqiUnCalculatedform.IraqiUnCalculated_1000})        
+            if(IraqiUnCalculatedform.IraqiUnCalculated_50) this.listIraqiUnCalculated.push({cid:6,value:IraqiUnCalculatedform.IraqiUnCalculated_500})        
+            if(IraqiUnCalculatedform.IraqiUnCalculated_50) this.listIraqiUnCalculated.push({cid:7,value:IraqiUnCalculatedform.IraqiUnCalculated_250})        
+
+
+          this.all = [
+            {
+                  id:1,
+                  invoiceId:1,
+                  currencyId:1,
+                  userId:2,
+                  achieved:this.formReactiveForms.value.achieved,
+                  loss:this.formReactiveForms.value.loss,
+                  forged:this.listfrod,
+                  IraqiCalculated:this.listIraqiCalculated,
+                  IraqiUnCalculated:this.listIraqiUnCalculated,
+                  UnIraqiCalculated:this.formReactiveForms.value.UnIraqiCalculated,
+                  UnIraqiUnCalculated:this.formReactiveForms.value.UnIraqiUnCalculated,
+                  unIraqiCalculated_Details:this.formReactiveForms.value.unIraqiCalculated_Details,
+                  unIraqiUnCalculated_Details:this.formReactiveForms.value.unIraqiUnCalculated_Details,
+                  extra:this.formReactiveForms.value.extra,
+                  unacceptable:this.formReactiveForms.value.unacceptable,
+                  auger:this.formReactiveForms.value.auger,
+                  buried:this.formReactiveForms.value.buried,
+                  cashier:this.formReactiveForms.value.cashier,
+                  notes:this.formReactiveForms.value.cashier,
+            }
+          ]
+            
+      console.log(this.all)
+            // console.log(this.listunIraqiCalculated)
           
             
 

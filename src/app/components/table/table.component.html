@@ -80,18 +80,18 @@
             <div class="grid gap-2 lg:grid-cols-3 p-2 text-sm">
 
               <div>
-                <label for="first_name" class="mb-1 text-sm font-medium text-gray-700">عدد
+                <label for="achieved" class="mb-1 text-sm font-medium text-gray-700">عدد
                   الاوراق المنجزة
                 </label>
-                <input formControlName="achieved" type="text" id="first_name" name="empl_id" autocomplete="off" placeholder=""
+                <input formControlName="achieved" type="number" minlength="0" name="achieved" id="achieved" autocomplete="off" placeholder=""
                   class="h-8 w-full bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg hover:border-[#b8a1d1] block focus:ring-2 ring-[#b8a1d1] ring-opacity-50 focus:outline-none"
-                  required="" />
+                   required="true"/>
               </div>
               <div>
-                <label for="first_name" class="mb-1 text-sm font-medium text-gray-700">عدد
+                <label for="loss" class="mb-1 text-sm font-medium text-gray-700">عدد
                   اوراق النقص
                 </label>
-                <input formControlName="loss" type="text" id="first_name" name="empl_id" autocomplete="off" placeholder=""
+                <input formControlName="loss" type="number" id="loss" name="loss" autocomplete="off" placeholder=""
                   class="h-8 w-full bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg hover:border-[#b8a1d1] block focus:ring-2 ring-[#b8a1d1] ring-opacity-50 focus:outline-none"
                   required="" />
               </div>
@@ -112,37 +112,37 @@
                     <tr class="bg-white">
                       <!-- *ngFor="let cat of products; let i = index" -->
                       <td class="p-1">50,000</td>
-                      <input formControlName="forged_50" type="text" id="first_name" autocomplete="off" placeholder=""
+                      <input formControlName="forged_50" type="number" id="forged_50" autocomplete="off" placeholder=""
                         class="bg-white border-gray-200 border-b text-gray-900 text-sm focus:outline-none" required="" />
                     </tr>
                     <tr class="bg-white">
                       <td class="p-1">25,000</td>
-                      <input formControlName="forged_25" type="text" id="first_name" autocomplete="off" placeholder=""
+                      <input formControlName="forged_25" type="number" id="forged_25" autocomplete="off" placeholder=""
                         class="bg-white border-gray-200 border-b text-gray-900 text-sm focus:outline-none" required="" />
                     </tr>
                     <tr class="bg-white">
                       <td class="p-1">10,000</td>
-                      <input formControlName="forged_10" type="text" id="first_name" autocomplete="off" placeholder=""
+                      <input formControlName="forged_10" type="number" id="forged_10" autocomplete="off" placeholder=""
                         class="bg-white border-gray-200 border-b text-gray-900 text-sm focus:outline-none" required="" />
                     </tr>
                     <tr class="bg-white">
                       <td class="p-1">5000</td>
-                      <input formControlName="forged_5" type="text" id="first_name" autocomplete="off" placeholder=""
+                      <input formControlName="forged_5" type="number" id="forged_5" autocomplete="off" placeholder=""
                         class="bg-white border-gray-200 border-b text-gray-900 text-sm focus:outline-none" required="" />
                     </tr>
                     <tr class="bg-white">
                       <td class="p-1">1000</td>
-                      <input formControlName="forged_1000" type="text" id="first_name" autocomplete="off" placeholder=""
+                      <input formControlName="forged_1000" type="number" id="forged_1000" autocomplete="off" placeholder=""
                         class="bg-white border-gray-200 border-b text-gray-900 text-sm focus:outline-none" required="" />
                     </tr>
                     <tr class="bg-white">
                       <td class="p-1">500</td>
-                      <input formControlName="forged_500" type="text" id="first_name" autocomplete="off" placeholder=""
+                      <input formControlName="forged_500" type="number" id="forged_500" autocomplete="off" placeholder=""
                         class="bg-white border-gray-200 border-b text-gray-900 text-sm focus:outline-none" required="" />
                     </tr>
                     <tr class="bg-white">
                       <td class="p-1">250</td>
-                      <input formControlName="forged_250" type="text" id="first_name" autocomplete="off" placeholder=""
+                      <input formControlName="forged_250" type="number" id="forged_250" autocomplete="off" placeholder=""
                         class="bg-white border-gray-200 border-b text-gray-900 text-sm focus:outline-none" required="" />
                     </tr>
                   </tbody>
@@ -159,41 +159,41 @@
                       <td class="p-2"><span>عدد الاوراق</span></td>
                     </tr>
                   </thead>
-                  <tbody class="text-xs" formGroupName="unIraqiCalculated">
+                  <tbody class="text-xs" formGroupName="IraqiCalculated">
                         <tr class="bg-white">
                           <!-- *ngFor="let cat of products; let i = index" -->
                           <td class="p-1">50,000</td>
-                          <input formControlName="unIraqiCalculated_50" type="text" id="first_name" autocomplete="off" placeholder=""
+                          <input formControlName="IraqiCalculated_50" type="number" id="IraqiCalculated_50" autocomplete="off" placeholder=""
                             class="bg-white border-gray-200 border-b text-gray-900 text-sm focus:outline-none" required="" />
                         </tr>
                         <tr class="bg-white">
                           <td class="p-1">25,000</td>
-                          <input formControlName="unIraqiCalculated_25" type="text" id="first_name" autocomplete="off" placeholder=""
+                          <input formControlName="IraqiCalculated_25" type="number" id="IraqiCalculated_25" autocomplete="off" placeholder=""
                             class="bg-white border-gray-200 border-b text-gray-900 text-sm focus:outline-none" required="" />
                         </tr>
                         <tr class="bg-white">
                           <td class="p-1">10,000</td>
-                          <input formControlName="unIraqiCalculated_10" type="text" id="first_name" autocomplete="off" placeholder=""
+                          <input formControlName="IraqiCalculated_10" type="number" id="IraqiCalculated_10" autocomplete="off" placeholder=""
                             class="bg-white border-gray-200 border-b text-gray-900 text-sm focus:outline-none" required="" />
                         </tr>
                         <tr class="bg-white">
                           <td class="p-1">5000</td>
-                          <input formControlName="unIraqiCalculated_5" type="text" id="first_name" autocomplete="off" placeholder=""
+                          <input formControlName="IraqiCalculated_5" type="number" id="IraqiCalculated_5" autocomplete="off" placeholder=""
                             class="bg-white border-gray-200 border-b text-gray-900 text-sm focus:outline-none" required="" />
                         </tr>
                         <tr class="bg-white">
                           <td class="p-1">1000</td>
-                          <input formControlName="unIraqiCalculated_1000" type="text" id="first_name" autocomplete="off" placeholder=""
+                          <input formControlName="IraqiCalculated_1000" type="number" id="IraqiCalculated_1000" autocomplete="off" placeholder=""
                             class="bg-white border-gray-200 border-b text-gray-900 text-sm focus:outline-none" required="" />
                         </tr>
                         <tr class="bg-white">
                           <td class="p-1">500</td>
-                          <input formControlName="unIraqiCalculated_500" type="text" id="first_name" autocomplete="off" placeholder=""
+                          <input formControlName="IraqiCalculated_500" type="number" id="IraqiCalculated_500" autocomplete="off" placeholder=""
                             class="bg-white border-gray-200 border-b text-gray-900 text-sm focus:outline-none" required="" />
                         </tr>
                         <tr class="bg-white">
                           <td class="p-1">250</td>
-                          <input formControlName="unIraqiCalculated_250" type="text" id="first_name" autocomplete="off" placeholder=""
+                          <input formControlName="IraqiCalculated_250" type="number" id="IraqiCalculated_250" autocomplete="off" placeholder=""
                             class="bg-white border-gray-200 border-b text-gray-900 text-sm focus:outline-none" required="" />
                         </tr>
                       </tbody>
@@ -211,41 +211,41 @@
                       <td class="p-2"><span>عدد الاوراق</span></td>
                     </tr>
                   </thead>
-                  <tbody class="text-xs" formGroupName="unIraqiUnCalculated">
+                  <tbody class="text-xs" formGroupName="IraqiUnCalculated">
                     <tr class="bg-white">
                       <!-- *ngFor="let cat of products; let i = index" -->
                       <td class="p-1">50,000</td>
-                      <input formControlName="unIraqiUnCalculated_50" type="text" id="first_name" autocomplete="off" placeholder=""
+                      <input formControlName="IraqiUnCalculated_50" type="number" id="IraqiUnCalculated_50" autocomplete="off" placeholder=""
                         class="bg-white border-gray-200 border-b text-gray-900 text-sm focus:outline-none" required="" />
                     </tr>
                     <tr class="bg-white">
                       <td class="p-1">25,000</td>
-                      <input formControlName="unIraqiUnCalculated_25" type="text" id="first_name" autocomplete="off" placeholder=""
+                      <input formControlName="IraqiUnCalculated_25" type="number" id="IraqiUnCalculated_25" autocomplete="off" placeholder=""
                         class="bg-white border-gray-200 border-b text-gray-900 text-sm focus:outline-none" required="" />
                     </tr>
                     <tr class="bg-white">
                       <td class="p-1">10,000</td>
-                      <input formControlName="unIraqiUnCalculated_10" type="text" id="first_name" autocomplete="off" placeholder=""
+                      <input formControlName="IraqiUnCalculated_10" type="number" id="IraqiUnCalculated_10" autocomplete="off" placeholder=""
                         class="bg-white border-gray-200 border-b text-gray-900 text-sm focus:outline-none" required="" />
                     </tr>
                     <tr class="bg-white">
                       <td class="p-1">5000</td>
-                      <input formControlName="unIraqiUnCalculated_5" type="text" id="first_name" autocomplete="off" placeholder=""
+                      <input formControlName="IraqiUnCalculated_10" type="number" id="IraqiUnCalculated_10" autocomplete="off" placeholder=""
                         class="bg-white border-gray-200 border-b text-gray-900 text-sm focus:outline-none" required="" />
                     </tr>
                     <tr class="bg-white">
                       <td class="p-1">1000</td>
-                      <input formControlName="unIraqiUnCalculated_1000" type="text" id="first_name" autocomplete="off" placeholder=""
+                      <input formControlName="IraqiUnCalculated_1000" type="number" id="IraqiUnCalculated_1000" autocomplete="off" placeholder=""
                         class="bg-white border-gray-200 border-b text-gray-900 text-sm focus:outline-none" required="" />
                     </tr>
                     <tr class="bg-white">
                       <td class="p-1">500</td>
-                      <input formControlName="unIraqiUnCalculated_500" type="text" id="first_name" autocomplete="off" placeholder=""
+                      <input formControlName="IraqiUnCalculated_500" type="number" id="IraqiUnCalculated_1000" autocomplete="off" placeholder=""
                         class="bg-white border-gray-200 border-b text-gray-900 text-sm focus:outline-none" required="" />
                     </tr>
                     <tr class="bg-white">
                       <td class="p-1">250</td>
-                      <input formControlName="unIraqiUnCalculated_250" type="text" id="first_name" autocomplete="off" placeholder=""
+                      <input formControlName="IraqiUnCalculated_250" type="number" id="IraqiUnCalculated_250" autocomplete="off" placeholder=""
                         class="bg-white border-gray-200 border-b text-gray-900 text-sm focus:outline-none" required="" />
                     </tr>
                   </tbody>
@@ -255,35 +255,35 @@
 
             <div class="grid gap-2 lg:grid-cols-4 p-1 text-sm">
               <div>
-                <label for="first_name" class="mb-1 text-sm font-medium text-gray-700">عدد
+                <label for="UnIraqiCalculated" class="mb-1 text-sm font-medium text-gray-700">عدد
                   الاوراق المحتسبة غير العراقية
                 </label>
-                <input formControlName="CalculatedunIraqi" type="text" id="first_name" name="empl_id" autocomplete="off" placeholder=""
+                <input formControlName="UnIraqiCalculated" type="number" id="UnIraqiCalculated" name="UnIraqiCalculated" autocomplete="off" placeholder=""
                   class="h-8 w-full mt-2 bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg hover:border-[#b8a1d1] block focus:ring-2 ring-[#b8a1d1] ring-opacity-50 focus:outline-none"
                   required="" />
 
               </div>
               <div>
-                <label for="first_name" class="mb-1 text-sm font-medium text-gray-700">
+                <label for="unIraqiCalculated_Details" class="mb-1 text-sm font-medium text-gray-700">
                  التفاصيل
                 </label>
-                <textarea formControlName="CalculatedunIraqi" type="text" id="first_name" name="empl_id" autocomplete="off" placeholder=""
+                <textarea formControlName="unIraqiCalculated_Details" type="text" id="unIraqiCalculated_Details" name="unIraqiCalculated_Details" autocomplete="off" placeholder=""
                   class="h-16 w-full mt-2 bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg hover:border-[#b8a1d1] block focus:ring-2 ring-[#b8a1d1] ring-opacity-50 focus:outline-none"
                   required=""></textarea>
               </div>
               <div>
-                <label for="first_name" class="mb-1 text-sm font-medium text-gray-700">عدد
+                <label for="UnIraqiUnCalculated" class="mb-1 text-sm font-medium text-gray-700">عدد
                   الاوراق الغير محتسبة غير العراقية
                 </label>
-                <input type="text" id="first_name" name="empl_id" autocomplete="off" placeholder=""
+                <input formControlName="UnIraqiUnCalculated" type="number" id="UnIraqiUnCalculated" name="UnIraqiUnCalculated" autocomplete="off" placeholder=""
                   class="h-8 w-full mt-2 bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg hover:border-[#b8a1d1] block focus:ring-2 ring-[#b8a1d1] ring-opacity-50 focus:outline-none"
                   required="" />
               </div>
               <div>
-                <label for="first_name" class="mb-1 text-sm font-medium text-gray-700">
+                <label for="unIraqiUnCalculated_Details" class="mb-1 text-sm font-medium text-gray-700">
                 تفاصيل
                 </label>
-                <textarea formControlName="unIraqiUnCalculated_Details" type="text" id="first_name" name="empl_id" autocomplete="off" placeholder=""
+                <textarea formControlName="unIraqiUnCalculated_Details" type="text" id="unIraqiUnCalculated_Details" name="unIraqiUnCalculated_Details" autocomplete="off" placeholder=""
                   class="h-16 w-full mt-2 bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg hover:border-[#b8a1d1] block focus:ring-2 ring-[#b8a1d1] ring-opacity-50 focus:outline-none"
                   required=""></textarea>
               </div>
@@ -291,30 +291,30 @@
 
             <div class="grid gap-6 lg:grid-cols-4 p-2 text-sm mt-0">
               <div>
-                <label for="first_name" class="mb-1 text-sm font-medium text-gray-700">الزيادة
+                <label for="extra" class="mb-1 text-sm font-medium text-gray-700">الزيادة
                 </label>
-                <input formControlName="extra" type="text" id="first_name" name="empl_id" autocomplete="off" placeholder=""
+                <input formControlName="extra" type="number" id="extra" name="extra" autocomplete="off" placeholder=""
                   class="h-8 w-full mt-2 bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg hover:border-[#b8a1d1] block focus:ring-2 ring-[#b8a1d1] ring-opacity-50 focus:outline-none"
                   required="" />
               </div>
               <div>
-                <label for="first_name" class="mb-1 text-sm font-medium text-gray-700">المرفوض
+                <label for="unacceptable" class="mb-1 text-sm font-medium text-gray-700">المرفوض
                 </label>
-                <input formControlName="unacceptable" type="text" id="first_name" name="empl_id" autocomplete="off" placeholder=""
+                <input formControlName="unacceptable" type="number" id="unacceptable" name="unacceptable" autocomplete="off" placeholder=""
                   class="h-8 w-full mt-2 bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg hover:border-[#b8a1d1] block focus:ring-2 ring-[#b8a1d1] ring-opacity-50 focus:outline-none"
                   required="" />
               </div>
               <div>
-                <label for="first_name" class="mb-1 text-sm font-medium text-gray-700">المثقب
+                <label for="auger" class="mb-1 text-sm font-medium text-gray-700">المثقب
                 </label>
-                <input formControlName="auger" type="text" id="first_name" name="empl_id" autocomplete="off" placeholder=""
+                <input formControlName="auger" type="number" id="auger" name="auger" autocomplete="off" placeholder=""
                   class="h-8 w-full mt-2 bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg hover:border-[#b8a1d1] block focus:ring-2 ring-[#b8a1d1] ring-opacity-50 focus:outline-none"
                   required="" />
               </div>
               <div>
-                <label for="first_name" class="mb-1 text-sm font-medium text-gray-700">المدفون
+                <label for="buried" class="mb-1 text-sm font-medium text-gray-700">المدفون
                 </label>
-                <input formControlName="buried" type="text" id="first_name" name="empl_id" autocomplete="off" placeholder=""
+                <input formControlName="buried" type="number" id="buried" name="buried" autocomplete="off" placeholder=""
                   class="h-8 w-full mt-2 bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg hover:border-[#b8a1d1] block focus:ring-2 ring-[#b8a1d1] ring-opacity-50 focus:outline-none"
                   required="" />
               </div>
@@ -322,17 +322,17 @@
 
             <div class="grid gap-4 lg:grid-cols-2 p-3 text-sm">
               <div>
-                <label for="first_name" class="mb-1 text-sm font-medium text-gray-700">اسم
+                <label for="cashier" class="mb-1 text-sm font-medium text-gray-700">اسم
                   امين الصندوق
                 </label>
-                <textarea formControlName="cashier" type="text" id="first_name" name="empl_id" autocomplete="off" placeholder=""
+                <textarea formControlName="cashier" type="number" id="cashier" name="cashier" autocomplete="off" placeholder=""
                   class="h-16 w-full mt-2 bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg hover:border-[#b8a1d1] block focus:ring-2 ring-[#b8a1d1] ring-opacity-50 focus:outline-none"
                   required=""></textarea>
               </div>
               <div>
-                <label for="first_name" class="mb-1 text-sm font-medium text-gray-700">ملاحظات
+                <label for="notes" class="mb-1 text-sm font-medium text-gray-700">ملاحظات
                 </label>
-                <textarea formControlName="notes" type="text" id="first_name" name="empl_id" autocomplete="off" placeholder=""
+                <textarea formControlName="notes" type="text" id="notes" name="notes" autocomplete="off" placeholder=""
                   class="h-16 w-full mt-2 bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg hover:border-[#b8a1d1] block focus:ring-2 ring-[#b8a1d1] ring-opacity-50 focus:outline-none"
                   required=""></textarea>
               </div>

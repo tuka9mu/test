@@ -15,8 +15,8 @@ export interface Statement {
       buried:Number,
       cashier:string,
       notes:string,
-      createdAt:Date,
-      updatedAt:Date,
-      isActive:boolean
+      // createdAt:Date,
+      // updatedAt:Date,
+      // isActive:boolean
 
 }
