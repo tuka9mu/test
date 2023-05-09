@@ -2,7 +2,7 @@ import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import * as data from './configration.json';
 import { IDropdownSettings } from 'ng-multiselect-dropdown';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
-import { FormControl, FormGroup, RequiredValidator, Validators } from '@angular/forms';
+import { FormControl, FormGroup, RequiredValidator, Validators, ReactiveFormsModule } from '@angular/forms';
 import * as NoWorkResult from 'postcss/lib/no-work-result';
 
 export interface Cat {
@@ -115,48 +115,52 @@ export class TableComponent implements OnInit {
 
             };
             this.formReactiveForms = new FormGroup({
-              achieved:new FormControl([0,Validators.requiredTrue, Validators.pattern("^[0-9]*$"),Validators.min(0)]),
-              loss:new FormControl(null,Validators.required),
+              achieved:new FormControl([Validators.pattern("^[0-9]*$")]),
+              loss:new FormControl(0),
               forged:new FormGroup({
-                  forged_50:new FormControl(null),
-                  forged_25:new FormControl(null),
-                  forged_10:new FormControl(null),
-                  forged_5:new FormControl(null),
-                  forged_1000:new FormControl(null),
-                  forged_500:new FormControl(null),
-                  forged_250:new FormControl(null),
+                  forged_50:new FormControl(0),
+                  forged_25:new FormControl(0),
+                  forged_10:new FormControl(0),
+                  forged_5:new FormControl(0),
+                  forged_1000:new FormControl(0),
+                  forged_500:new FormControl(0),
+                  forged_250:new FormControl(0),
               }),
               IraqiCalculated: new FormGroup({
-                  IraqiCalculated_50:new FormControl(null),
-                  IraqiCalculated_25:new FormControl(null),
-                  IraqiCalculated_10:new FormControl(null),
-                  IraqiCalculated_5:new FormControl(null),
-                  IraqiCalculated_1000:new FormControl(null),
-                  IraqiCalculated_500:new FormControl(null),
-                  IraqiCalculated_250:new FormControl(null),
+                  IraqiCalculated_50:new FormControl(0),
+                  IraqiCalculated_25:new FormControl(0),
+                  IraqiCalculated_10:new FormControl(0),
+                  IraqiCalculated_5:new FormControl(0),
+                  IraqiCalculated_1000:new FormControl(0),
+                  IraqiCalculated_500:new FormControl(0),
+                  IraqiCalculated_250:new FormControl(0),
               }),
               IraqiUnCalculated: new FormGroup({
-                  IraqiUnCalculated_50:new FormControl(null),
-                  IraqiUnCalculated_25:new FormControl(null),
-                  IraqiUnCalculated_10:new FormControl(null),
-                  IraqiUnCalculated_5:new FormControl(null),
-                  IraqiUnCalculated_1000:new FormControl(null),
-                  IraqiUnCalculated_500:new FormControl(null),
-                  IraqiUnCalculated_250:new FormControl(null),
+                  IraqiUnCalculated_50:new FormControl(0),
+                  IraqiUnCalculated_25:new FormControl(0),
+                  IraqiUnCalculated_10:new FormControl(0),
+                  IraqiUnCalculated_5:new FormControl(0),
+                  IraqiUnCalculated_1000:new FormControl(0),
+                  IraqiUnCalculated_500:new FormControl(0),
+                  IraqiUnCalculated_250:new FormControl(0),
               }),
-              UnIraqiCalculated: new FormControl(null),
-              UnIraqiUnCalculated: new FormControl(null),
+              UnIraqiCalculated: new FormControl(0),
+              UnIraqiUnCalculated: new FormControl(0),
               unIraqiCalculated_Details: new FormControl(null),
               unIraqiUnCalculated_Details: new FormControl(null),
-              extra: new FormControl(null),
-              unacceptable:new FormControl(null),
-              auger:new FormControl(null),
-              buried:new FormControl(null),
+              extra: new FormControl(0),
+              unacceptable:new FormControl(0),
+              auger:new FormControl(0),
+              buried:new FormControl(0),
               cashier:new FormControl(null),
               notes: new FormControl(null),
 
             });
+            
       }
+      get achived() {
+            return this.formReactiveForms.get('achieved');
+          }
       onItemSelect(item: any) {
             console.log(item);
       }
@@ -234,3 +238,5 @@ export class TableComponent implements OnInit {
 
       }
 }
+
+

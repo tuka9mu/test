@@ -1,25 +1,35 @@
 <div class="h-full mt-14 mb-10 md:mr-48 mr-14">
-
   <div class="w-full flex justfiy-end">
     <div class="m-3">
       <label class="text-sm text-right font-medium text-gray-900 block">
         تاريخ الايداع
       </label>
-      <input type="date"
-        class="p-3 bg-white border border-gray-300 text-gray-900 text-sm rounded-lg hover:border-sky-300 focus:border-blue-500 focus:outline-none focus:ring" />
+      <input
+        type="date"
+        class="p-3 bg-white border border-gray-300 text-gray-900 text-sm rounded-lg hover:border-sky-300 focus:border-blue-500 focus:outline-none focus:ring"
+      />
     </div>
     <div class="w-1/2 p-3">
       <label class="text-sm font-medium text-gray-900 mr-3 ml-2">
         اختار المصرف
       </label>
-      <ng-multiselect-dropdown [placeholder]="'أختار المصرف'" [settings]="dropdownSettings" class="text-center"
-        [data]="dropdownList" [(ngModel)]="selectedItems" (onSelect)="onItemSelect($event)">
+      <ng-multiselect-dropdown
+        [placeholder]="'أختار المصرف'"
+        [settings]="dropdownSettings"
+        class="text-center"
+        [data]="dropdownList"
+        [(ngModel)]="selectedItems"
+        (onSelect)="onItemSelect($event)"
+      >
       </ng-multiselect-dropdown>
     </div>
-    <div class="flex items-center justify-end w-full p-3 border-solid border-slate-200 rounded-b">
+    <div
+      class="flex items-center justify-end w-full p-3 border-solid border-slate-200 rounded-b"
+    >
       <button
         class="bg-[#1e3a8a] text-white active:bg-emerald-600 font-bold uppercase text-sm px-6 py-3 rounded shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
-        type="button">
+        type="button"
+      >
         حفظ
       </button>
     </div>
@@ -31,7 +41,9 @@
       <div class="w-full overflow-x-auto">
         <table class="w-full divide-y">
           <thead>
-            <tr class="text-sm font-semibold tracking-wide text-center text-white uppercase border-b bg-[#f97316]">
+            <tr
+              class="text-sm font-semibold tracking-wide text-center text-white uppercase border-b bg-[#f97316]"
+            >
               <th>الفئة</th>
               <th>Amount</th>
               <th>Status</th>
@@ -44,11 +56,11 @@
           <tbody *ngFor="let cat of products" class="bg-gray-50 divide-y">
             <tr class="hover:bg-gray-100 text-center">
               <td>
-                <a (click)="openXl(longContent)"> <img class="cursor-pointer" src="{{ cat.path }}" /></a>
+                <a (click)="openXl(longContent)">
+                  <img class="cursor-pointer" src="{{ cat.path }}"
+                /></a>
               </td>
-
             </tr>
-
           </tbody>
         </table>
       </div>
@@ -59,46 +71,94 @@
 
 <ng-template #longContent let-modal>
   <div
-    class="overflow-x-hidden overflow-y-auto fixed inset-0 z-50 outline-none focus:outline-none justify-center items-center flex text-center bg-blue-100 bg-opacity-25">
+    class="overflow-x-hidden overflow-y-auto fixed inset-0 z-50 outline-none focus:outline-none justify-center items-center flex text-center bg-blue-100 bg-opacity-25"
+  >
     <div class="relative mx-auto">
-      <div class="border-0 rounded-lg shadow-lg flex flex-col bg-white outline-none focus:outline-none p-3">
-        <svg xmlns="http://www.w3.org/2000/svg" height="24" class="cursour-pointer"
-          (click)="modal.dismiss('Cross click')" width="24" xmlns:xlink="http://www.w3.org/1999/xlink"
-          enable-background="new 0 0 512 512" id="Layer_1" version="1.1" viewBox="0 0 512 512" xml:space="preserve">
-          <linearGradient gradientUnits="userSpaceOnUse" id="SVGID_1_" x1="256" x2="256" y1="512" y2="-9.094947e-013">
+      <div
+        class="border-0 rounded-lg shadow-lg flex flex-col bg-white outline-none focus:outline-none p-3"
+      >
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          height="24"
+          class="cursour-pointer"
+          (click)="modal.dismiss('Cross click')"
+          width="24"
+          xmlns:xlink="http://www.w3.org/1999/xlink"
+          enable-background="new 0 0 512 512"
+          id="Layer_1"
+          version="1.1"
+          viewBox="0 0 512 512"
+          xml:space="preserve"
+        >
+          <linearGradient
+            gradientUnits="userSpaceOnUse"
+            id="SVGID_1_"
+            x1="256"
+            x2="256"
+            y1="512"
+            y2="-9.094947e-013"
+          >
             <stop offset="0" style="stop-color: #e73827" />
             <stop offset="1" style="stop-color: #f85032" />
           </linearGradient>
           <circle cx="256" cy="256" fill="url(#SVGID_1_)" r="256" />
           <path
             d="M268.7,256l119.6-119.6c3.2-3.2,3.2-8.3,0-11.4c-3.2-3.2-8.3-3.2-11.4,0L257.2,244.6L135.1,122.5  c-3.2-3.2-8.3-3.2-11.4,0c-3.2,3.2-3.2,8.3,0,11.4L245.8,256L123.7,378.1c-3.2,3.2-3.2,8.3,0,11.4c1.6,1.6,3.7,2.4,5.7,2.4  c2.1,0,4.1-0.8,5.7-2.4l122.1-122.1l119.6,119.6c1.6,1.6,3.7,2.4,5.7,2.4c2.1,0,4.1-0.8,5.7-2.4c3.2-3.2,3.2-8.3,0-11.4L268.7,256z"
-            fill="#FFFFFF" />
+            fill="#FFFFFF"
+          />
         </svg>
 
         <div>
           <form [formGroup]="formReactiveForms" (ngSubmit)="save()">
             <div class="grid gap-2 lg:grid-cols-3 p-2 text-sm">
-
               <div>
-                <label for="achieved" class="mb-1 text-sm font-medium text-gray-700">عدد
-                  الاوراق المنجزة
+                <label
+                  for="achieved"
+                  class="mb-1 text-sm font-medium text-gray-700"
+                  >عدد الاوراق المنجزة
                 </label>
-                <input formControlName="achieved" type="number" minlength="0" name="achieved" id="achieved" autocomplete="off" placeholder=""
+                <input
+                  formControlName="achieved"
+                  type="number"
+                  min="0"
+                  id="achieved"
+                  autocomplete="off"
+                  placeholder=""
                   class="h-8 w-full bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg hover:border-[#b8a1d1] block focus:ring-2 ring-[#b8a1d1] ring-opacity-50 focus:outline-none"
-                   required="true"/>
+                  required
+                  minlength="4"
+                />
+               
+
+                <span *ngIf="achived.invalid && (achived.dirty || achived.touched)"
+                class="text-red-500 text-right">يرجى ادخال الحقل اعلاه</span>
+                <span *ngIf="achived.valid"
+                ></span>
+
+
               </div>
               <div>
-                <label for="loss" class="mb-1 text-sm font-medium text-gray-700">عدد
-                  اوراق النقص
+                <label for="loss" class="mb-1 text-sm font-medium text-gray-700"
+                  >عدد اوراق النقص
                 </label>
-                <input formControlName="loss" type="number" id="loss" name="loss" autocomplete="off" placeholder=""
+                <input
+                  formControlName="loss"
+                  type="number"
+                  id="loss"
+                  min="0"
+                  name="loss"
+                  autocomplete="off"
+                  placeholder=""
                   class="h-8 w-full bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg hover:border-[#b8a1d1] block focus:ring-2 ring-[#b8a1d1] ring-opacity-50 focus:outline-none"
-                  required="" />
+                  required=""
+                />
               </div>
             </div>
             <div class="grid gap-4 lg:grid-cols-3 px-1">
               <div>
-                <label class="mb-1 text-gray-700 text-bold">عدد اوراق المزيف</label>
+                <label class="mb-1 text-gray-700 text-bold"
+                  >عدد اوراق المزيف</label
+                >
                 <table class="w-full p-4">
                   <thead class="text-gray-100 font-semibold text-center">
                     <tr class="bg-[#f97316] text-sm">
@@ -112,44 +172,102 @@
                     <tr class="bg-white">
                       <!-- *ngFor="let cat of products; let i = index" -->
                       <td class="p-1">50,000</td>
-                      <input formControlName="forged_50" type="number" id="forged_50" autocomplete="off" placeholder=""
-                        class="bg-white border-gray-200 border-b text-gray-900 text-sm focus:outline-none" required="" />
+                      <input
+                        formControlName="forged_50"
+                        type="number"
+                        min="0"
+                        id="forged_50"
+                        autocomplete="off"
+                        placeholder=""
+                        class="bg-white border-gray-200 border-b text-gray-900 text-sm focus:outline-none"
+                        required=""
+                      />
                     </tr>
                     <tr class="bg-white">
                       <td class="p-1">25,000</td>
-                      <input formControlName="forged_25" type="number" id="forged_25" autocomplete="off" placeholder=""
-                        class="bg-white border-gray-200 border-b text-gray-900 text-sm focus:outline-none" required="" />
+                      <input
+                        formControlName="forged_25"
+                        type="number"
+                        min="0"
+                        id="forged_25"
+                        autocomplete="off"
+                        placeholder=""
+                        class="bg-white border-gray-200 border-b text-gray-900 text-sm focus:outline-none"
+                        required=""
+                      />
                     </tr>
                     <tr class="bg-white">
                       <td class="p-1">10,000</td>
-                      <input formControlName="forged_10" type="number" id="forged_10" autocomplete="off" placeholder=""
-                        class="bg-white border-gray-200 border-b text-gray-900 text-sm focus:outline-none" required="" />
+                      <input
+                        formControlName="forged_10"
+                        type="number"
+                        min="0"
+                        id="forged_10"
+                        autocomplete="off"
+                        placeholder=""
+                        class="bg-white border-gray-200 border-b text-gray-900 text-sm focus:outline-none"
+                        required=""
+                      />
                     </tr>
                     <tr class="bg-white">
                       <td class="p-1">5000</td>
-                      <input formControlName="forged_5" type="number" id="forged_5" autocomplete="off" placeholder=""
-                        class="bg-white border-gray-200 border-b text-gray-900 text-sm focus:outline-none" required="" />
+                      <input
+                        formControlName="forged_5"
+                        type="number"
+                        min="0"
+                        id="forged_5"
+                        autocomplete="off"
+                        placeholder=""
+                        class="bg-white border-gray-200 border-b text-gray-900 text-sm focus:outline-none"
+                        required=""
+                      />
                     </tr>
                     <tr class="bg-white">
                       <td class="p-1">1000</td>
-                      <input formControlName="forged_1000" type="number" id="forged_1000" autocomplete="off" placeholder=""
-                        class="bg-white border-gray-200 border-b text-gray-900 text-sm focus:outline-none" required="" />
+                      <input
+                        formControlName="forged_1000"
+                        type="number"
+                        min="0"
+                        id="forged_1000"
+                        autocomplete="off"
+                        placeholder=""
+                        class="bg-white border-gray-200 border-b text-gray-900 text-sm focus:outline-none"
+                        required=""
+                      />
                     </tr>
                     <tr class="bg-white">
                       <td class="p-1">500</td>
-                      <input formControlName="forged_500" type="number" id="forged_500" autocomplete="off" placeholder=""
-                        class="bg-white border-gray-200 border-b text-gray-900 text-sm focus:outline-none" required="" />
+                      <input
+                        formControlName="forged_500"
+                        type="number"
+                        min="0"
+                        id="forged_500"
+                        autocomplete="off"
+                        placeholder=""
+                        class="bg-white border-gray-200 border-b text-gray-900 text-sm focus:outline-none"
+                        required=""
+                      />
                     </tr>
                     <tr class="bg-white">
                       <td class="p-1">250</td>
-                      <input formControlName="forged_250" type="number" id="forged_250" autocomplete="off" placeholder=""
-                        class="bg-white border-gray-200 border-b text-gray-900 text-sm focus:outline-none" required="" />
+                      <input
+                        formControlName="forged_250"
+                        type="number"
+                        min="0"
+                        id="forged_250"
+                        autocomplete="off"
+                        placeholder=""
+                        class="bg-white border-gray-200 border-b text-gray-900 text-sm focus:outline-none"
+                        required=""
+                      />
                     </tr>
                   </tbody>
                 </table>
               </div>
               <div>
-                <label class="mb-1 text-gray-700 text-bold">عدد اوراق المحتسبة عراقية</label>
+                <label class="mb-1 text-gray-700 text-bold"
+                  >عدد اوراق المحتسبة عراقية</label
+                >
                 <table class="w-full p-4">
                   <thead class="text-gray-100 font-semibold text-center">
                     <tr class="bg-[#f97316] text-sm">
@@ -160,48 +278,105 @@
                     </tr>
                   </thead>
                   <tbody class="text-xs" formGroupName="IraqiCalculated">
-                        <tr class="bg-white">
-                          <!-- *ngFor="let cat of products; let i = index" -->
-                          <td class="p-1">50,000</td>
-                          <input formControlName="IraqiCalculated_50" type="number" id="IraqiCalculated_50" autocomplete="off" placeholder=""
-                            class="bg-white border-gray-200 border-b text-gray-900 text-sm focus:outline-none" required="" />
-                        </tr>
-                        <tr class="bg-white">
-                          <td class="p-1">25,000</td>
-                          <input formControlName="IraqiCalculated_25" type="number" id="IraqiCalculated_25" autocomplete="off" placeholder=""
-                            class="bg-white border-gray-200 border-b text-gray-900 text-sm focus:outline-none" required="" />
-                        </tr>
-                        <tr class="bg-white">
-                          <td class="p-1">10,000</td>
-                          <input formControlName="IraqiCalculated_10" type="number" id="IraqiCalculated_10" autocomplete="off" placeholder=""
-                            class="bg-white border-gray-200 border-b text-gray-900 text-sm focus:outline-none" required="" />
-                        </tr>
-                        <tr class="bg-white">
-                          <td class="p-1">5000</td>
-                          <input formControlName="IraqiCalculated_5" type="number" id="IraqiCalculated_5" autocomplete="off" placeholder=""
-                            class="bg-white border-gray-200 border-b text-gray-900 text-sm focus:outline-none" required="" />
-                        </tr>
-                        <tr class="bg-white">
-                          <td class="p-1">1000</td>
-                          <input formControlName="IraqiCalculated_1000" type="number" id="IraqiCalculated_1000" autocomplete="off" placeholder=""
-                            class="bg-white border-gray-200 border-b text-gray-900 text-sm focus:outline-none" required="" />
-                        </tr>
-                        <tr class="bg-white">
-                          <td class="p-1">500</td>
-                          <input formControlName="IraqiCalculated_500" type="number" id="IraqiCalculated_500" autocomplete="off" placeholder=""
-                            class="bg-white border-gray-200 border-b text-gray-900 text-sm focus:outline-none" required="" />
-                        </tr>
-                        <tr class="bg-white">
-                          <td class="p-1">250</td>
-                          <input formControlName="IraqiCalculated_250" type="number" id="IraqiCalculated_250" autocomplete="off" placeholder=""
-                            class="bg-white border-gray-200 border-b text-gray-900 text-sm focus:outline-none" required="" />
-                        </tr>
-                      </tbody>
+                    <tr class="bg-white">
+                      <!-- *ngFor="let cat of products; let i = index" -->
+                      <td class="p-1">50,000</td>
+                      <input
+                        formControlName="IraqiCalculated_50"
+                        type="number"
+                        min="0"
+                        id="IraqiCalculated_50"
+                        autocomplete="off"
+                        placeholder=""
+                        class="bg-white border-gray-200 border-b text-gray-900 text-sm focus:outline-none"
+                        required=""
+                      />
+                    </tr>
+                    <tr class="bg-white">
+                      <td class="p-1">25,000</td>
+                      <input
+                        formControlName="IraqiCalculated_25"
+                        type="number"
+                        min="0"
+                        id="IraqiCalculated_25"
+                        autocomplete="off"
+                        placeholder=""
+                        class="bg-white border-gray-200 border-b text-gray-900 text-sm focus:outline-none"
+                        required=""
+                      />
+                    </tr>
+                    <tr class="bg-white">
+                      <td class="p-1">10,000</td>
+                      <input
+                        formControlName="IraqiCalculated_10"
+                        type="number"
+                        min="0"
+                        id="IraqiCalculated_10"
+                        autocomplete="off"
+                        placeholder=""
+                        class="bg-white border-gray-200 border-b text-gray-900 text-sm focus:outline-none"
+                        required=""
+                      />
+                    </tr>
+                    <tr class="bg-white">
+                      <td class="p-1">5000</td>
+                      <input
+                        formControlName="IraqiCalculated_5"
+                        type="number"
+                        min="0"
+                        id="IraqiCalculated_5"
+                        autocomplete="off"
+                        placeholder=""
+                        class="bg-white border-gray-200 border-b text-gray-900 text-sm focus:outline-none"
+                        required=""
+                      />
+                    </tr>
+                    <tr class="bg-white">
+                      <td class="p-1">1000</td>
+                      <input
+                        formControlName="IraqiCalculated_1000"
+                        type="number"
+                        min="0"
+                        id="IraqiCalculated_1000"
+                        autocomplete="off"
+                        placeholder=""
+                        class="bg-white border-gray-200 border-b text-gray-900 text-sm focus:outline-none"
+                        required=""
+                      />
+                    </tr>
+                    <tr class="bg-white">
+                      <td class="p-1">500</td>
+                      <input
+                        formControlName="IraqiCalculated_500"
+                        type="number"
+                        min="0"
+                        id="IraqiCalculated_500"
+                        autocomplete="off"
+                        placeholder=""
+                        class="bg-white border-gray-200 border-b text-gray-900 text-sm focus:outline-none"
+                        required=""
+                      />
+                    </tr>
+                    <tr class="bg-white">
+                      <td class="p-1">250</td>
+                      <input
+                        formControlName="IraqiCalculated_250"
+                        type="number"
+                        min="0"
+                        id="IraqiCalculated_250"
+                        autocomplete="off"
+                        placeholder=""
+                        class="bg-white border-gray-200 border-b text-gray-900 text-sm focus:outline-none"
+                        required=""
+                      />
+                    </tr>
+                  </tbody>
                 </table>
               </div>
               <div>
-                <label class="mb-1 text-gray-700 text-bold">عدد اوراق غير المحتسبة
-                  عراقية</label>
+                <label class="mb-1 text-gray-700 text-bold"
+                  >عدد اوراق غير المحتسبة عراقية</label
+                >
                 <table class="w-full p-4">
                   <thead class="text-gray-100 font-semibold text-center">
                     <tr class="bg-[#f97316] text-sm">
@@ -215,38 +390,94 @@
                     <tr class="bg-white">
                       <!-- *ngFor="let cat of products; let i = index" -->
                       <td class="p-1">50,000</td>
-                      <input formControlName="IraqiUnCalculated_50" type="number" id="IraqiUnCalculated_50" autocomplete="off" placeholder=""
-                        class="bg-white border-gray-200 border-b text-gray-900 text-sm focus:outline-none" required="" />
+                      <input
+                        formControlName="IraqiUnCalculated_50"
+                        type="number"
+                        min="0"
+                        id="IraqiUnCalculated_50"
+                        autocomplete="off"
+                        placeholder=""
+                        class="bg-white border-gray-200 border-b text-gray-900 text-sm focus:outline-none"
+                        required=""
+                      />
                     </tr>
                     <tr class="bg-white">
                       <td class="p-1">25,000</td>
-                      <input formControlName="IraqiUnCalculated_25" type="number" id="IraqiUnCalculated_25" autocomplete="off" placeholder=""
-                        class="bg-white border-gray-200 border-b text-gray-900 text-sm focus:outline-none" required="" />
+                      <input
+                        formControlName="IraqiUnCalculated_25"
+                        type="number"
+                        min="0"
+                        id="IraqiUnCalculated_25"
+                        autocomplete="off"
+                        placeholder=""
+                        class="bg-white border-gray-200 border-b text-gray-900 text-sm focus:outline-none"
+                        required=""
+                      />
                     </tr>
                     <tr class="bg-white">
                       <td class="p-1">10,000</td>
-                      <input formControlName="IraqiUnCalculated_10" type="number" id="IraqiUnCalculated_10" autocomplete="off" placeholder=""
-                        class="bg-white border-gray-200 border-b text-gray-900 text-sm focus:outline-none" required="" />
+                      <input
+                        formControlName="IraqiUnCalculated_10"
+                        type="number"
+                        min="0"
+                        id="IraqiUnCalculated_10"
+                        autocomplete="off"
+                        placeholder=""
+                        class="bg-white border-gray-200 border-b text-gray-900 text-sm focus:outline-none"
+                        required=""
+                      />
                     </tr>
                     <tr class="bg-white">
                       <td class="p-1">5000</td>
-                      <input formControlName="IraqiUnCalculated_10" type="number" id="IraqiUnCalculated_10" autocomplete="off" placeholder=""
-                        class="bg-white border-gray-200 border-b text-gray-900 text-sm focus:outline-none" required="" />
+                      <input
+                        formControlName="IraqiUnCalculated_10"
+                        type="number"
+                        min="0"
+                        id="IraqiUnCalculated_10"
+                        autocomplete="off"
+                        placeholder=""
+                        class="bg-white border-gray-200 border-b text-gray-900 text-sm focus:outline-none"
+                        required=""
+                      />
                     </tr>
                     <tr class="bg-white">
                       <td class="p-1">1000</td>
-                      <input formControlName="IraqiUnCalculated_1000" type="number" id="IraqiUnCalculated_1000" autocomplete="off" placeholder=""
-                        class="bg-white border-gray-200 border-b text-gray-900 text-sm focus:outline-none" required="" />
+                      <input
+                        formControlName="IraqiUnCalculated_1000"
+                        type="number"
+                        min="0"
+                        id="IraqiUnCalculated_1000"
+                        autocomplete="off"
+                        placeholder=""
+                        class="bg-white border-gray-200 border-b text-gray-900 text-sm focus:outline-none"
+                        required=""
+                      />
                     </tr>
                     <tr class="bg-white">
                       <td class="p-1">500</td>
-                      <input formControlName="IraqiUnCalculated_500" type="number" id="IraqiUnCalculated_1000" autocomplete="off" placeholder=""
-                        class="bg-white border-gray-200 border-b text-gray-900 text-sm focus:outline-none" required="" />
+                      <input
+                        formControlName="IraqiUnCalculated_500"
+                        type="number"
+                        min="0"
+                        id="IraqiUnCalculated_1000"
+                        autocomplete="off"
+                        placeholder=""
+                        class="bg-white border-gray-200 border-b text-gray-900 text-sm focus:outline-none"
+                        required=""
+                      />
                     </tr>
                     <tr class="bg-white">
                       <td class="p-1">250</td>
-                      <input formControlName="IraqiUnCalculated_250" type="number" id="IraqiUnCalculated_250" autocomplete="off" placeholder=""
-                        class="bg-white border-gray-200 border-b text-gray-900 text-sm focus:outline-none" required="" />
+                      <input
+                        formControlName="IraqiUnCalculated_250"
+                        type="number"
+                        min="0"
+                        id="IraqiUnCalculated_250"
+                        autocomplete="off"
+                        placeholder=""
+                        class="bg-white border-gray-200 border-b text-gray-900 text-sm focus:outline-none"
+                        required=""
+                      />
                     </tr>
                   </tbody>
                 </table>
@@ -255,102 +486,205 @@
 
             <div class="grid gap-2 lg:grid-cols-4 p-1 text-sm">
               <div>
-                <label for="UnIraqiCalculated" class="mb-1 text-sm font-medium text-gray-700">عدد
-                  الاوراق المحتسبة غير العراقية
+                <label
+                  for="UnIraqiCalculated"
+                  class="mb-1 text-sm font-medium text-gray-700"
+                  >عدد الاوراق المحتسبة غير العراقية
                 </label>
-                <input formControlName="UnIraqiCalculated" type="number" id="UnIraqiCalculated" name="UnIraqiCalculated" autocomplete="off" placeholder=""
+                <input
+                  formControlName="UnIraqiCalculated"
+                  type="number"
+                  min="0"
+                  id="UnIraqiCalculated"
+                  name="UnIraqiCalculated"
+                  autocomplete="off"
+                  placeholder=""
                   class="h-8 w-full mt-2 bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg hover:border-[#b8a1d1] block focus:ring-2 ring-[#b8a1d1] ring-opacity-50 focus:outline-none"
-                  required="" />
-
+                  required=""
+                />
               </div>
               <div>
-                <label for="unIraqiCalculated_Details" class="mb-1 text-sm font-medium text-gray-700">
-                 التفاصيل
+                <label
+                  for="unIraqiCalculated_Details"
+                  class="mb-1 text-sm font-medium text-gray-700"
+                >
+                  التفاصيل
                 </label>
-                <textarea formControlName="unIraqiCalculated_Details" type="text" id="unIraqiCalculated_Details" name="unIraqiCalculated_Details" autocomplete="off" placeholder=""
+                <textarea
+                  formControlName="unIraqiCalculated_Details"
+                  type="text"
+                  id="unIraqiCalculated_Details"
+                  name="unIraqiCalculated_Details"
+                  autocomplete="off"
+                  placeholder=""
                   class="h-16 w-full mt-2 bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg hover:border-[#b8a1d1] block focus:ring-2 ring-[#b8a1d1] ring-opacity-50 focus:outline-none"
-                  required=""></textarea>
+                  required=""
+                ></textarea>
               </div>
               <div>
-                <label for="UnIraqiUnCalculated" class="mb-1 text-sm font-medium text-gray-700">عدد
-                  الاوراق الغير محتسبة غير العراقية
+                <label
+                  for="UnIraqiUnCalculated"
+                  class="mb-1 text-sm font-medium text-gray-700"
+                  >عدد الاوراق الغير محتسبة غير العراقية
                 </label>
-                <input formControlName="UnIraqiUnCalculated" type="number" id="UnIraqiUnCalculated" name="UnIraqiUnCalculated" autocomplete="off" placeholder=""
+                <input
+                  formControlName="UnIraqiUnCalculated"
+                  type="number"
+                  min="0"
+                  id="UnIraqiUnCalculated"
+                  name="UnIraqiUnCalculated"
+                  autocomplete="off"
+                  placeholder=""
                   class="h-8 w-full mt-2 bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg hover:border-[#b8a1d1] block focus:ring-2 ring-[#b8a1d1] ring-opacity-50 focus:outline-none"
-                  required="" />
+                  required=""
+                />
               </div>
               <div>
-                <label for="unIraqiUnCalculated_Details" class="mb-1 text-sm font-medium text-gray-700">
-                تفاصيل
+                <label
+                  for="unIraqiUnCalculated_Details"
+                  class="mb-1 text-sm font-medium text-gray-700"
+                >
+                  تفاصيل
                 </label>
-                <textarea formControlName="unIraqiUnCalculated_Details" type="text" id="unIraqiUnCalculated_Details" name="unIraqiUnCalculated_Details" autocomplete="off" placeholder=""
+                <textarea
+                  formControlName="unIraqiUnCalculated_Details"
+                  type="text"
+                  id="unIraqiUnCalculated_Details"
+                  name="unIraqiUnCalculated_Details"
+                  autocomplete="off"
+                  placeholder=""
                   class="h-16 w-full mt-2 bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg hover:border-[#b8a1d1] block focus:ring-2 ring-[#b8a1d1] ring-opacity-50 focus:outline-none"
-                  required=""></textarea>
+                  required=""
+                ></textarea>
               </div>
             </div>
 
             <div class="grid gap-6 lg:grid-cols-4 p-2 text-sm mt-0">
               <div>
-                <label for="extra" class="mb-1 text-sm font-medium text-gray-700">الزيادة
+                <label
+                  for="extra"
+                  class="mb-1 text-sm font-medium text-gray-700"
+                  >الزيادة
                 </label>
-                <input formControlName="extra" type="number" id="extra" name="extra" autocomplete="off" placeholder=""
+                <input
+                  formControlName="extra"
+                  type="number"
+                  min="0"
+                  id="extra"
+                  name="extra"
+                  autocomplete="off"
+                  placeholder=""
                   class="h-8 w-full mt-2 bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg hover:border-[#b8a1d1] block focus:ring-2 ring-[#b8a1d1] ring-opacity-50 focus:outline-none"
-                  required="" />
+                  required=""
+                />
               </div>
               <div>
-                <label for="unacceptable" class="mb-1 text-sm font-medium text-gray-700">المرفوض
+                <label
+                  for="unacceptable"
+                  class="mb-1 text-sm font-medium text-gray-700"
+                  >المرفوض
                 </label>
-                <input formControlName="unacceptable" type="number" id="unacceptable" name="unacceptable" autocomplete="off" placeholder=""
+                <input
+                  formControlName="unacceptable"
+                  type="number"
+                  min="0"
+                  id="unacceptable"
+                  name="unacceptable"
+                  autocomplete="off"
+                  placeholder=""
                   class="h-8 w-full mt-2 bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg hover:border-[#b8a1d1] block focus:ring-2 ring-[#b8a1d1] ring-opacity-50 focus:outline-none"
-                  required="" />
+                  required=""
+                />
               </div>
               <div>
-                <label for="auger" class="mb-1 text-sm font-medium text-gray-700">المثقب
+                <label
+                  for="auger"
+                  class="mb-1 text-sm font-medium text-gray-700"
+                  >المثقب
                 </label>
-                <input formControlName="auger" type="number" id="auger" name="auger" autocomplete="off" placeholder=""
+                <input
+                  formControlName="auger"
+                  type="number"
+                  min="0"
+                  id="auger"
+                  name="auger"
+                  autocomplete="off"
+                  placeholder=""
                   class="h-8 w-full mt-2 bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg hover:border-[#b8a1d1] block focus:ring-2 ring-[#b8a1d1] ring-opacity-50 focus:outline-none"
-                  required="" />
+                  required=""
+                />
               </div>
               <div>
-                <label for="buried" class="mb-1 text-sm font-medium text-gray-700">المدفون
+                <label
+                  for="buried"
+                  class="mb-1 text-sm font-medium text-gray-700"
+                  >المدفون
                 </label>
-                <input formControlName="buried" type="number" id="buried" name="buried" autocomplete="off" placeholder=""
+                <input
+                  formControlName="buried"
+                  type="number"
+                  min="0"
+                  id="buried"
+                  name="buried"
+                  autocomplete="off"
+                  placeholder=""
                   class="h-8 w-full mt-2 bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg hover:border-[#b8a1d1] block focus:ring-2 ring-[#b8a1d1] ring-opacity-50 focus:outline-none"
-                  required="" />
+                  required=""
+                />
               </div>
             </div>
 
             <div class="grid gap-4 lg:grid-cols-2 p-3 text-sm">
               <div>
-                <label for="cashier" class="mb-1 text-sm font-medium text-gray-700">اسم
-                  امين الصندوق
+                <label
+                  for="cashier"
+                  class="mb-1 text-sm font-medium text-gray-700"
+                  >اسم امين الصندوق
                 </label>
-                <textarea formControlName="cashier" type="number" id="cashier" name="cashier" autocomplete="off" placeholder=""
+                <textarea
+                  formControlName="cashier"
+                  type="number"
+                  id="cashier"
+                  name="cashier"
+                  autocomplete="off"
+                  placeholder=""
                   class="h-16 w-full mt-2 bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg hover:border-[#b8a1d1] block focus:ring-2 ring-[#b8a1d1] ring-opacity-50 focus:outline-none"
-                  required=""></textarea>
+                  required=""
+                ></textarea>
               </div>
               <div>
-                <label for="notes" class="mb-1 text-sm font-medium text-gray-700">ملاحظات
+                <label
+                  for="notes"
+                  class="mb-1 text-sm font-medium text-gray-700"
+                  >ملاحظات
                 </label>
-                <textarea formControlName="notes" type="text" id="notes" name="notes" autocomplete="off" placeholder=""
+                <textarea
+                  formControlName="notes"
+                  type="text"
+                  id="notes"
+                  name="notes"
+                  autocomplete="off"
+                  placeholder=""
                   class="h-16 w-full mt-2 bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg hover:border-[#b8a1d1] block focus:ring-2 ring-[#b8a1d1] ring-opacity-50 focus:outline-none"
-                  required=""></textarea>
+                  required=""
+                ></textarea>
               </div>
             </div>
 
-
-            <div class="flex items-center justify-end p-3 border-t border-solid border-slate-200 rounded-b">
-              <button
-                class="bg-[#1e3a8a] text-white active:bg-emerald-600 font-bold uppercase text-sm px-6 py-3 rounded shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
-                type="submit">
+            <div
+              class="flex items-center justify-end p-3 border-t border-solid border-slate-200 rounded-b"
+            >
+              <button [disabled]="achived.invalid && achived.touched"
+                class="bg-[#1e3a8a] text-white font-bold uppercase text-sm px-6 py-3 rounded shadow focus:outline-none mr-1 mb-1"
+                type="submit"
+              >
                 حفظ الكشف
               </button>
             </div>
           </form>
         </div>
-
-
       </div>
     </div>
   </div>
 </ng-template>
+
