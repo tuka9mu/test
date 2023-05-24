@@ -9,9 +9,7 @@ import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 })
 export class NgbdModalOptions {
 	closeResult: string | undefined;
-
 	constructor(private modalService: NgbModal) {}
-
 	openScrollableContent(longContent: any) {
 		this.modalService.open(longContent, { scrollable: true });
 	}

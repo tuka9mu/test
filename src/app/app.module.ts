@@ -1,3 +1,4 @@
+import { StatmentsComponent } from './components/statments/statments.component';
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { ReactiveFormsModule } from '@angular/forms';
@@ -15,6 +16,9 @@ import { ModalDismissReasons, NgbDatepickerModule, NgbModal } from '@ng-bootstra
 import { MultiSelectComponent } from "ng-multiselect-dropdown";
 import { FormGroup } from '@angular/forms';
 import { FormsModule } from '@angular/forms';
+import { GraphQLModule } from './graphql.module';
+import { CommonModule } from '@angular/common';
+import { BankComponent } from './components/banks/bank.component';
 @NgModule({
     declarations: [
         AppComponent,
@@ -22,6 +26,8 @@ import { FormsModule } from '@angular/forms';
         NavbarComponent,
         TableComponent,
         ReportComponent,
+        BankComponent,
+        StatmentsComponent
     ],
     providers: [],
     bootstrap: [AppComponent],
@@ -32,7 +38,7 @@ import { FormsModule } from '@angular/forms';
         NgMultiSelectDropDownModule,
         ReactiveFormsModule,
         HttpClientModule,
-        NgbPaginationModule, NgbAlertModule, NgbDatepickerModule,
+        NgbPaginationModule, NgbAlertModule, NgbDatepickerModule, GraphQLModule,CommonModule
 
     ]
 })

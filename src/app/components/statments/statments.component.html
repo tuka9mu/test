@@ -1,0 +1,51 @@
+<div class="h-full mt-14 mb-10 md:mr-48 mr-14">
+      <h1 class="text-bold text-center text-3xl">جميع الكشوفات</h1>
+<div class="mt-4 mx-4">
+  <div class="w-full overflow-hidden rounded-lg shadow-xs">
+    <div class="w-full overflow-x-auto">
+      <table class="w-full divide-y">
+        <thead>
+          <tr
+            class="text-sm font-semibold tracking-wide text-center text-white uppercase border-b bg-[#f97316]"
+          >
+            <th>id </th>
+            <th>التاريخ</th>
+            <th>رمز المصرف</th>
+            <th>رمز الموقع</th>
+            <th>تم انشاؤه </th>
+            <th>تم التعديل عليه</th>
+            <th>فعال ام لا  </th>
+          </tr>
+        </thead>
+        <tbody *ngFor="let cat of all2" class="bg-gray-50 divide-y">
+          <tr class="hover:bg-gray-100 text-center">
+            <td>
+              {{ cat.id }}
+            </td>
+            <td>
+              {{ cat.workingdate | date:'medium' }}
+            </td>
+            <td>
+              {{ cat.Bank.name }}
+            </td>
+            <td>
+              {{ cat.Site.name }}
+            </td>
+            <td>
+              {{ cat.createdAt | date:'medium'}}
+            </td>
+            <td>
+              {{ cat.updatedAt | date:'medium' }}
+            </td>
+            <td>
+              {{ cat.isActive }}
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+</div>
+
+
