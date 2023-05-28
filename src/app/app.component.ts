@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
-import { AuthService } from './service/auth.service';
+
 import {Apollo, gql} from 'apollo-angular';
+import { AuthService } from './components/auth/Service/auth.service';
 
 
 @Component({
@@ -10,5 +11,5 @@ import {Apollo, gql} from 'apollo-angular';
 })
 export class AppComponent {
   title = 'app';
-  constructor(public authService: AuthService){}
+  constructor(public auth:AuthService){}
 }

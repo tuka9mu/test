@@ -2,7 +2,7 @@ import { IraqiuncalculatedLogs } from './iraqiuncalculated-logs';
 import { IraqicalculatedLogs } from './iraqicalculated-logs';
 import { FakedLogs } from './faked-logs';
 import { Statement } from './statement';
-import { Bank } from './bank';
+import { Bank } from '../components/banks/bank';
 import { Site } from './site';
 
 export interface Invoice {

@@ -1,6 +1,6 @@
-import { Bank } from './../../model/bank';
+
 import { Invoice } from './../../model/invoice';
-import { Component, OnInit, ViewEncapsulation } from '@angular/core';
+import { Component, Inject, OnInit, ViewEncapsulation } from '@angular/core';
 import * as data from './configration.json';
 import { IDropdownSettings } from 'ng-multiselect-dropdown';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
@@ -16,8 +16,10 @@ import * as NoWorkResult from 'postcss/lib/no-work-result';
 import { Apollo, ApolloBase, gql } from 'apollo-angular';
 import { map, Observable } from 'rxjs';
 import { Statement } from 'src/app/model/statement';
-import { GET_BANKS } from '../services/banks';
-import { GET_INVOICE } from '../services/invoice';
+import { GET_INVOICE } from './invoice';
+import { DOCUMENT } from '@angular/common';
+import { shouldInclude } from '@apollo/client/utilities';
+import { Bank } from '../banks/bank';
 
 export interface frod {
   cid: number;
@@ -55,12 +57,13 @@ export class TableComponent implements OnInit {
   formReactiveForms: FormGroup;
   myForm: FormGroup;
   apollo: ApolloBase;
-
+  CurID: 0;
   constructor(
     private modalService: NgbModal,
     private apolloProvider: Apollo,
     private fb: FormBuilder,
-    private fd: FormBuilder
+    private fd: FormBuilder,
+    @Inject(DOCUMENT) document: Document
   ) {
     this.apollo = this.apolloProvider.use('addwafariz');
   }
@@ -72,9 +75,9 @@ export class TableComponent implements OnInit {
 
   all2: Statement[] = [];
 
-  openXl(longContent: any, Currency:any) {
+  openXl(longContent: any, Currency: any) {
     console.log(Currency);
-
+    this.CurID = Currency;
 
     this.modalService.open(longContent, { size: 'xl' });
   }
@@ -87,14 +90,22 @@ export class TableComponent implements OnInit {
   products: any = (data as any).default;
 
   ngOnInit() {
-    this.apollo
+      this.apollo
       .watchQuery({
-        query: GET_BANKS,
+        query: gql`
+          {
+            GetBanks {
+              id
+              name
+            }
+          }
+        `,
       })
-      .valueChanges.subscribe(({ data }: any) => {
-        this.banks = data.GetBanks;
-      });
-
+      .valueChanges.pipe(
+        map((result: any) => result?.data),
+        map((data) => data?.GetBanks)
+        
+      );
     this.apollo
       .watchQuery({
         query: GET_INVOICE,
@@ -198,21 +209,82 @@ export class TableComponent implements OnInit {
       }
     `;
     console.log(Create_Invoice);
-    // const ADD_INVOICE = gql`
-    //   ${Create_Invoice}
-    // `;
-    // this.apollo
-    //   .mutate({ mutation: ADD_INVOICE })
-    //   .pipe(
-    //     map((result: any) => result?.data),
-    //     map((data) => data?.SetInvoice)
-    //   )
-    //   .subscribe((dd) => {
-    //     console.log(dd);
-    //   });
+    const ADD_INVOICE = gql`
+      ${Create_Invoice}
+    `;
+    this.apollo
+      .mutate({ mutation: ADD_INVOICE })
+      .pipe(
+        map((result: any) => result?.data),
+        map((data) => data?.SetInvoice)
+      )
+      .subscribe((dd) => {
+        console.log(dd);
+      });
+
+
+      
   }
 
   public save() {
+    let tr = 'S' + this.CurID;
+    const tag = document.getElementById(tr);
+    const cell1 = document.createElement('td');
+    const cell2 = document.createElement('td');
+    const cell3 = document.createElement('td');
+    const cell4 = document.createElement('td');
+    const cell5 = document.createElement('td');
+    const cell6 = document.createElement('td');
+    const cell7 = document.createElement('td');
+    const cell8 = document.createElement('td');
+    const cellText1 = document.createTextNode(
+      `${this.formReactiveForms.value.achieved}`,
+    );
+    const cellText2 = document.createTextNode(
+      `${this.formReactiveForms.value.loss}`,
+    );
+    const cellText3 = document.createTextNode(
+      `${this.formReactiveForms.value.extra}`,
+    );
+    const cellText4 = document.createTextNode(
+      `${this.formReactiveForms.value.unacceptable}`,
+    );
+    const cellText5 = document.createTextNode(
+      `${this.formReactiveForms.value.auger}`,
+    );
+    const cellText6 = document.createTextNode(
+      `${this.formReactiveForms.value.buried}`,
+    );
+    const cellText7 = document.createTextNode(
+      `${this.formReactiveForms.value.cashier}`,
+    );
+    const cellText8 = document.createTextNode(
+      `${this.formReactiveForms.value.notes}`,
+    );
+    cell1.appendChild(cellText1);
+    document.getElementById(tr).appendChild(cell1);
+    cell2.appendChild(cellText2);
+    document.getElementById(tr).appendChild(cell2);
+
+    cell3.appendChild(cellText3);
+    document.getElementById(tr).appendChild(cell3);
+    cell4.appendChild(cellText4);
+    document.getElementById(tr).appendChild(cell4);
+    cell5.appendChild(cellText5);
+    document.getElementById(tr).appendChild(cell5);
+    cell6.appendChild(cellText6);
+    document.getElementById(tr).appendChild(cell6);
+    cell7.appendChild(cellText7);
+    document.getElementById(tr).appendChild(cell7);
+    cell8.appendChild(cellText8);
+    document.getElementById(tr).appendChild(cell8);
+
+
+    console.log(tag);
+
+
+
+
     let frodform = this.formReactiveForms.value.forged;
     this.listfrod = [];
     if (frodform.forged_50 > 0)
@@ -339,6 +411,7 @@ export class TableComponent implements OnInit {
       },
     ];
     console.log(this.all2);
+    this.modalService.dismissAll();
   }
 
   public datess() {}
@@ -354,6 +427,6 @@ export class TableComponent implements OnInit {
     console.log((this.selectedId = name));
   }
   closeModel() {
-    this.showModal = !this.showModal;
+    
   }
 }

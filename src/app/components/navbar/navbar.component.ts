@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { AuthService } from 'src/app/service/auth.service';
+import { AuthService } from '../auth/Service/auth.service';
 
 @Component({
   selector: 'app-navbar',
@@ -14,7 +14,7 @@ export class NavbarComponent implements OnInit {
   }
 
   onLogout(){
-    this.authService.logout();
+    this.authService.signOut();
   }
 
 

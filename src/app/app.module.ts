@@ -4,7 +4,6 @@ import { BrowserModule } from '@angular/platform-browser';
 import { ReactiveFormsModule } from '@angular/forms';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { LoginComponent } from './components/login/login.component';
 import { NavbarComponent } from './components/navbar/navbar.component';
 import { TableComponent } from './components/table/table.component';
 import { NgMultiSelectDropDownModule } from 'ng-multiselect-dropdown';
@@ -19,17 +18,18 @@ import { FormsModule } from '@angular/forms';
 import { GraphQLModule } from './graphql.module';
 import { CommonModule } from '@angular/common';
 import { BankComponent } from './components/banks/bank.component';
+import { LoginComponent } from './components/auth/login/login.component';
+import { AuthGuard } from './components/auth/guard/auth.guard';
 @NgModule({
     declarations: [
         AppComponent,
-        LoginComponent,
         NavbarComponent,
         TableComponent,
         ReportComponent,
         BankComponent,
         StatmentsComponent
     ],
-    providers: [],
+    providers: [AuthGuard],
     bootstrap: [AppComponent],
     imports: [
         BrowserModule,

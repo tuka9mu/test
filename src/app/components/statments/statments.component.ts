@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Apollo, ApolloBase, gql } from 'apollo-angular';
 import { Invoice } from 'src/app/model/invoice';
-import { GET_INVOICE, GET_INVOICES } from '../services/invoice';
+import { GET_INVOICE, GET_INVOICES } from '../table/invoice';
 @Component({
   selector: 'app-statments',
   templateUrl: './statments.component.html',

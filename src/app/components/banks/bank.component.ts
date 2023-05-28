@@ -1,10 +1,10 @@
-import { Bank } from './../../model/bank';
+import { Bank } from './bank';
 import { Component, OnInit } from '@angular/core';
 import { Apollo, gql, ApolloBase } from 'apollo-angular';
-import { ADD_BANKS, DELETE_BANKS, GET_BANKS } from '../services/banks';
 import { map } from 'rxjs';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { BankServiceService } from './bank-service.service';
 @Component({
   selector: 'app-bank',
   templateUrl: './bank.component.html',
@@ -12,6 +12,7 @@ import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 })
 export class BankComponent implements OnInit {
   banks: Bank[] = [];
+  mybank: Bank = new Bank();
   bankForms: FormGroup;
   apollo: ApolloBase;
   showModal = false;
@@ -19,141 +20,55 @@ export class BankComponent implements OnInit {
   constructor(
     private apolloProvider: Apollo,
     private modalService: NgbModal,
-    private fb: FormBuilder
+    private fb: FormBuilder,
+    private bankservice: BankServiceService
   ) {
     this.apollo = this.apolloProvider.use('addwafariz');
   }
-  openXl(longContent: any, ff: Bank | null): void {
+  openXl(longContent: any, bank: Bank | null): void {
     this.modalService.open(longContent, { size: 'xl' });
-    console.log(ff);
-    if (ff != null) {
-      this.selected = ff;
+    console.log(bank);
+    if (bank != null) {
+      this.selected = bank;
       this.bankForms?.patchValue({
-        id: ff.id,
-        name: ff.name,
+        id: bank.id,
+        name: bank.name,
       });
     }
   }
-
   ngOnInit(): void {
-    this.apollo
-      .watchQuery({
-        query: GET_BANKS,
-      })
-      .valueChanges.subscribe(({ data }: any) => {
-        this.banks = data.GetBanks;
-      });
+    this.bankservice.getBank().subscribe((data: any) => {
+      this.banks = data;
+    });
     this.bankForms = this.fb.group({
       id: [''],
       name: ['', Validators.required],
     });
   }
-
   public save(): any {
-    console.log(this.bankForms);
-
-    let Create_Visitor = `
-        mutation{
-            createBank(data:{
-            id:0,
-            name:"${this.bankForms.value.name}",
-          }){
-            id
-            name 
-            createdAt
-          }
-  }`;
-
-    console.log(Create_Visitor);
-
-    const ADD_BANKS = gql`
-      ${Create_Visitor}
-    `;
-    this.apollo
-      .mutate({ mutation: ADD_BANKS })
-      .pipe(
-        map((result: any) => result?.data),
-        map((data) => data?.createBank)
-      )
-      .subscribe((dd) => {
-        console.log(dd);
-        let mybank = {
-          id: dd.id,
-          name: dd.name,
-          createdAt: dd.createdAt,
-        };
-        let newP: Bank = dd;
-        console.log(newP);
-
-        this.banks = Object.assign([], this.banks);
-        this.banks.push(newP);
-        //this.ngOnInit()
-        console.log(this.banks);
-      });
+    if (this.bankForms != null) {
+      this.mybank.name = this.bankForms.get('name').value;
+    }
+    console.log(this.mybank);
+    return this.bankservice.addBank(this.mybank).subscribe((data: any) => {
+      console.log('addbank   >>>>>');
+      console.log(data);
+    });
   }
-  public update(): any {
-    console.log(this.bankForms);
-
-    let Update_Bank = `
-      mutation {
-        updateBank(data:{
-              id:${this.bankForms.value.id},
-              name:"${this.bankForms.value.name}",
-            }){
-              id
-              name
-              createdAt
-            }}`;
-
-    console.log(Update_Bank);
-
-    const UPDATE_BANKS = gql`
-      ${Update_Bank}
-    `;
-    this.apollo
-      .mutate({
-        mutation: UPDATE_BANKS,
-        variables: {
-          id: 12,
-        },
-      })
-      .subscribe(({ data }) => {
-        console.log('got data', data);
-      });
+  public update(id: number): any {
+    if (this.bankForms != null) {
+      this.mybank.name = this.bankForms.get('name').value;
+    }
+    this.bankservice.updateBank(id, this.mybank);
+    this.modalService.dismissAll();
   }
-  deleteTodo(id: any) {
-    console.log(id);
+  DeleteBank(id: number): any {
+    return this.bankservice.deleteBank(id).subscribe((data: any) => {
+      console.log(data);
+    });
 
-    const ddd = `
-      mutation {
-          deleteBank(data: ${id}) {
-          id
-        }
-      }`;
-    console.log(ddd);
-
-    const DELETE_BANKS = gql`
-      ${ddd}
-    `;
-    // apollo graphql query to delete todo
-    this.apollo
-      .mutate({
-        mutation: DELETE_BANKS,
-        variables: {
-          id: '${this.bankForms.value.id}',
-        },
-        refetchQueries: [
-          {
-            query: GET_BANKS,
-          },
-        ],
-      })
-      .subscribe(({ data }: any) => {
-        this.banks = data.deleteBank;
-      });
-    console.log(id);
   }
   closeModel() {
-    this.showModal = !this.showModal;
+    this.modalService.dismissAll();
   }
 }
