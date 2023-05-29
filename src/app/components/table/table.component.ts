@@ -1,3 +1,4 @@
+import { BankServiceService } from './../banks/bank-service.service';
 
 import { Invoice } from './../../model/invoice';
 import { Component, Inject, OnInit, ViewEncapsulation } from '@angular/core';
@@ -20,6 +21,7 @@ import { GET_INVOICE } from './invoice';
 import { DOCUMENT } from '@angular/common';
 import { shouldInclude } from '@apollo/client/utilities';
 import { Bank } from '../banks/bank';
+import { validate } from 'graphql';
 
 export interface frod {
   cid: number;
@@ -62,7 +64,7 @@ export class TableComponent implements OnInit {
     private modalService: NgbModal,
     private apolloProvider: Apollo,
     private fb: FormBuilder,
-    private fd: FormBuilder,
+    private bankservice: BankServiceService,
     @Inject(DOCUMENT) document: Document
   ) {
     this.apollo = this.apolloProvider.use('addwafariz');
@@ -70,9 +72,7 @@ export class TableComponent implements OnInit {
   listfrod: frod[] = [];
   listIraqiCalculated: IraqiCalculated[] = [];
   listIraqiUnCalculated: IraqiUnCalculated[] = [];
-
   all: Invoice[] = [];
-
   all2: Statement[] = [];
 
   openXl(longContent: any, Currency: any) {
@@ -90,22 +90,10 @@ export class TableComponent implements OnInit {
   products: any = (data as any).default;
 
   ngOnInit() {
-      this.apollo
-      .watchQuery({
-        query: gql`
-          {
-            GetBanks {
-              id
-              name
-            }
-          }
-        `,
-      })
-      .valueChanges.pipe(
-        map((result: any) => result?.data),
-        map((data) => data?.GetBanks)
-        
-      );
+    this.bankservice.getBank().subscribe((data: any) => {
+      this.banks = data;
+    });
+    console.log(this.bankservice.getBank());
     this.apollo
       .watchQuery({
         query: GET_INVOICE,
@@ -123,7 +111,8 @@ export class TableComponent implements OnInit {
       allowSearchFilter: true,
     };
     this.formReactiveForms = this.fb.group({
-      achieved: ['', Validators.pattern('^[0-9]*$')],
+      workingdate: ['', Validators.required],
+      achieved: ['', Validators.required, Validators.pattern('^[0-9]*$')],
       loss: [''],
       forged: this.fb.group({
         forged_50: [0],
@@ -163,9 +152,11 @@ export class TableComponent implements OnInit {
       cashier: [''],
       notes: [''],
     });
-
     this.myForm = this.fb.group({
-      workingdate: [''],
+      date: {
+        value: new Date().toISOString().substring(0, 10),
+        disabled: true,
+      },
       bank: [''],
     });
   }
@@ -176,12 +167,12 @@ export class TableComponent implements OnInit {
         mutation{
           SetInvoice(data:{
             id:0,
-            workingdate:"${this.myForm.value.workingdate}",
             Bank:[{id:"${this.selectedItems[0].id}",name:"${this.selectedItems[0].name}"}]
             bankId:"${this.selectedItems[0].id}",,
             siteId:1,
             Statement:[{
               id:0,
+              workingdate:"${this.myForm.value.workingdate}",
               currencyId:"${this.formReactiveForms.value.currency}",
               achieved:"${this.formReactiveForms.value.achieved}",
               loss:"${this.formReactiveForms.value.loss}",
@@ -221,9 +212,6 @@ export class TableComponent implements OnInit {
       .subscribe((dd) => {
         console.log(dd);
       });
-
-
-      
   }
 
   public save() {
@@ -238,34 +226,33 @@ export class TableComponent implements OnInit {
     const cell7 = document.createElement('td');
     const cell8 = document.createElement('td');
     const cellText1 = document.createTextNode(
-      `${this.formReactiveForms.value.achieved}`,
+      `${this.formReactiveForms.value.achieved}`
     );
     const cellText2 = document.createTextNode(
-      `${this.formReactiveForms.value.loss}`,
+      `${this.formReactiveForms.value.loss}`
     );
     const cellText3 = document.createTextNode(
-      `${this.formReactiveForms.value.extra}`,
+      `${this.formReactiveForms.value.extra}`
     );
     const cellText4 = document.createTextNode(
-      `${this.formReactiveForms.value.unacceptable}`,
+      `${this.formReactiveForms.value.unacceptable}`
     );
     const cellText5 = document.createTextNode(
-      `${this.formReactiveForms.value.auger}`,
+      `${this.formReactiveForms.value.auger}`
     );
     const cellText6 = document.createTextNode(
-      `${this.formReactiveForms.value.buried}`,
+      `${this.formReactiveForms.value.buried}`
     );
     const cellText7 = document.createTextNode(
-      `${this.formReactiveForms.value.cashier}`,
+      `${this.formReactiveForms.value.cashier}`
     );
     const cellText8 = document.createTextNode(
-      `${this.formReactiveForms.value.notes}`,
+      `${this.formReactiveForms.value.notes}`
     );
     cell1.appendChild(cellText1);
     document.getElementById(tr).appendChild(cell1);
     cell2.appendChild(cellText2);
     document.getElementById(tr).appendChild(cell2);
-
     cell3.appendChild(cellText3);
     document.getElementById(tr).appendChild(cell3);
     cell4.appendChild(cellText4);
@@ -278,12 +265,7 @@ export class TableComponent implements OnInit {
     document.getElementById(tr).appendChild(cell7);
     cell8.appendChild(cellText8);
     document.getElementById(tr).appendChild(cell8);
-
-
     console.log(tag);
-
-
-
 
     let frodform = this.formReactiveForms.value.forged;
     this.listfrod = [];
@@ -391,6 +373,7 @@ export class TableComponent implements OnInit {
         },
         currencyId: 1,
         userId: 2,
+        workingdate: '2023/2/2',
         achieved: this.formReactiveForms.value.achieved,
         loss: this.formReactiveForms.value.loss,
         forged: this.listfrod,
@@ -426,7 +409,5 @@ export class TableComponent implements OnInit {
     this.showModal = !this.showModal;
     console.log((this.selectedId = name));
   }
-  closeModel() {
-    
-  }
+  closeModel() {}
 }

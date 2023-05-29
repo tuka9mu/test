@@ -3,6 +3,7 @@ import { Currency } from './currency';
 export interface Statement {
       id: Number;
       invoiceId: Number;
+      workingdate:string;
       Currency:Currency,
       currencyId: Number;
       userId: Number;
