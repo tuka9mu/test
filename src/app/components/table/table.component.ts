@@ -1,3 +1,4 @@
+import { Currency } from './../../model/currency';
 import { BankServiceService } from './../banks/bank-service.service';
 
 import { Invoice } from './../../model/invoice';
@@ -74,11 +75,11 @@ export class TableComponent implements OnInit {
   listIraqiUnCalculated: IraqiUnCalculated[] = [];
   all: Invoice[] = [];
   all2: Statement[] = [];
+  currency:Currency[]=[];
 
-  openXl(longContent: any, Currency: any) {
-    console.log(Currency);
-    this.CurID = Currency;
-
+  openXl(longContent: any, c: any) {
+    console.log(c);
+    this.CurID = c;
     this.modalService.open(longContent, { size: 'xl' });
   }
   selectedId!: string;
@@ -94,6 +95,7 @@ export class TableComponent implements OnInit {
       this.banks = data;
     });
     console.log(this.bankservice.getBank());
+    
     this.apollo
       .watchQuery({
         query: GET_INVOICE,
@@ -110,6 +112,7 @@ export class TableComponent implements OnInit {
       itemsShowLimit: 3,
       allowSearchFilter: true,
     };
+
     this.formReactiveForms = this.fb.group({
       workingdate: ['', Validators.required],
       achieved: ['', Validators.required, Validators.pattern('^[0-9]*$')],
@@ -152,6 +155,7 @@ export class TableComponent implements OnInit {
       cashier: [''],
       notes: [''],
     });
+
     this.myForm = this.fb.group({
       date: {
         value: new Date().toISOString().substring(0, 10),
@@ -159,7 +163,9 @@ export class TableComponent implements OnInit {
       },
       bank: [''],
     });
+
   }
+  
   public save2() {
     console.log(this.myForm.value);
     console.log(this.all);
@@ -365,15 +371,12 @@ export class TableComponent implements OnInit {
         id: 1,
         invoiceId: 1,
         Currency: {
-          id: 1,
-          name: '5000',
-          createdAt: new Date('2023-05-10T09:40:32.956Z'),
-          updatedAt: new Date('2023-05-10T09:40:32.956Z'),
-          isActive: true,
+          id: this.currency[0].id,
+          name: this.currency[0].name,
         },
-        currencyId: 1,
+        currencyId: this.CurID,
         userId: 2,
-        workingdate: '2023/2/2',
+        workingdate: this.formReactiveForms.value.workingdate,
         achieved: this.formReactiveForms.value.achieved,
         loss: this.formReactiveForms.value.loss,
         forged: this.listfrod,
@@ -397,11 +400,10 @@ export class TableComponent implements OnInit {
     this.modalService.dismissAll();
   }
 
-  public datess() {}
-
   get achived() {
     return this.formReactiveForms.get('achieved');
   }
+
   onItemSelect(item: any) {
     console.log(item);
   }
@@ -409,5 +411,5 @@ export class TableComponent implements OnInit {
     this.showModal = !this.showModal;
     console.log((this.selectedId = name));
   }
-  closeModel() {}
+
 }
