@@ -25,7 +25,7 @@ import { Bank } from '../banks/bank';
 import { validate } from 'graphql';
 
 export interface frod {
-  cid: number;
+  currencyId: number;
   value: number;
 }
 export interface forin2 {
@@ -33,7 +33,7 @@ export interface forin2 {
   name: String;
 }
 export interface IraqiCalculated {
-  cid: number;
+  currencyId: number;
   value: number;
 }
 export interface IraqiUnCalculated {
@@ -71,12 +71,16 @@ export class TableComponent implements OnInit {
     this.apollo = this.apolloProvider.use('addwafariz');
   }
   listfrod: frod[] = [];
+
+  listStatments: String[] = [];
   listIraqiCalculated: IraqiCalculated[] = [];
-  listIraqiUnCalculated: IraqiUnCalculated[] = [];
   all: Invoice[] = [];
   all2: Statement[] = [];
-  currency:Currency[]=[];
-
+  currency: Currency[] = [];
+  test(aaCurID: any) { 
+       return this.CurID != aaCurID;
+ 
+    }
   openXl(longContent: any, c: any) {
     console.log(c);
     this.CurID = c;
@@ -95,7 +99,7 @@ export class TableComponent implements OnInit {
       this.banks = data;
     });
     console.log(this.bankservice.getBank());
-    
+
     this.apollo
       .watchQuery({
         query: GET_INVOICE,
@@ -115,7 +119,7 @@ export class TableComponent implements OnInit {
 
     this.formReactiveForms = this.fb.group({
       workingdate: ['', Validators.required],
-      achieved: ['', Validators.required, Validators.pattern('^[0-9]*$')],
+      achieved: ['', [Validators.required, Validators.pattern('^[0-9]*$')]],
       loss: [''],
       forged: this.fb.group({
         forged_50: [0],
@@ -135,19 +139,8 @@ export class TableComponent implements OnInit {
         IraqiCalculated_500: [0],
         IraqiCalculated_250: [0],
       }),
-      IraqiUnCalculated: this.fb.group({
-        IraqiUnCalculated_50: [0],
-        IraqiUnCalculated_25: [0],
-        IraqiUnCalculated_10: [0],
-        IraqiUnCalculated_5: [0],
-        IraqiUnCalculated_1000: [0],
-        IraqiUnCalculated_500: [0],
-        IraqiUnCalculated_250: [0],
-      }),
       UnIraqiCalculated: [0],
-      UnIraqiUnCalculated: [0],
       unIraqiCalculated_Details: [''],
-      unIraqiUnCalculated_Details: [''],
       extra: [0],
       unacceptable: [0],
       auger: [0],
@@ -163,41 +156,28 @@ export class TableComponent implements OnInit {
       },
       bank: [''],
     });
-
   }
-  
-  public save2() {
+
+  public saveInvoice() {
     console.log(this.myForm.value);
     console.log(this.all);
+    let StatementString = '';
+    this.listStatments.forEach((dd) => {
+      StatementString += `${dd}`;
+    });
+    if (this.listfrod.length > 0) {
+      StatementString = `Statement:[${StatementString}] ,`;
+    }
+
+    console.log(StatementString);
+   
     let Create_Invoice = `
         mutation{
           SetInvoice(data:{
             id:0,
-            Bank:[{id:"${this.selectedItems[0].id}",name:"${this.selectedItems[0].name}"}]
-            bankId:"${this.selectedItems[0].id}",,
+            bankId:${this.selectedItems[0]?.id},
             siteId:1,
-            Statement:[{
-              id:0,
-              deptdate:"${this.myForm.value.workingdate}",
-              currencyId:"${this.formReactiveForms.value.currency}",
-              achieved:"${this.formReactiveForms.value.achieved}",
-              loss:"${this.formReactiveForms.value.loss}",
-              IraqiCalculated:"${this.formReactiveForms.value.IraqiCalculated}",
-              unIraqiCalculated:"${this.formReactiveForms.value.unIraqiCalculated}",
-              unIraqiCalculated_Details: "${this.formReactiveForms.value.unIraqiCalculated_Details}",
-              extra: "${this.formReactiveForms.value.extra}",
-              unacceptable: "${this.formReactiveForms.value.unacceptable}",
-              auger: "${this.formReactiveForms.value.auger}",
-              buried: "${this.formReactiveForms.value.buried}",
-              cashier: "${this.formReactiveForms.value.cashier}",
-              notes: "${this.formReactiveForms.value.notes}",
-              userId:1,
-              Faked_Logs:[
-                {
-                currencyId:"${this.listfrod[0]?.cid}",
-                value:"${this.listfrod[0]?.value}"
-              }]
-            }]
+            ${StatementString}
         })
         {
           id
@@ -219,9 +199,107 @@ export class TableComponent implements OnInit {
       });
   }
 
-  public save() {
+  public saveStatment() {
     let tr = 'S' + this.CurID;
+
+    let frodform = this.formReactiveForms.value.forged;
+    this.listfrod = [];
+    if (frodform.forged_50 > 0)
+      this.listfrod.push({ currencyId: 1, value: frodform.forged_50 });
+    if (frodform.forged_25 > 0)
+      this.listfrod.push({ currencyId: 2, value: frodform.forged_25 });
+    if (frodform.forged_10 > 0)
+      this.listfrod.push({ currencyId: 3, value: frodform.forged_10 });
+    if (frodform.forged_5 > 0)
+      this.listfrod.push({ currencyId: 4, value: frodform.forged_5 });
+    if (frodform.forged_1000 > 0)
+      this.listfrod.push({ currencyId: 5, value: frodform.forged_1000 });
+    if (frodform.forged_500 > 0)
+      this.listfrod.push({ currencyId: 6, value: frodform.forged_500 });
+    if (frodform.forged_250 > 0)
+      this.listfrod.push({ currencyId: 7, value: frodform.forged_250 });
+    console.log(this.listfrod);
+    let IraqiCalculatedform = this.formReactiveForms.value.IraqiCalculated;
+    this.listIraqiCalculated = [];
+    if (IraqiCalculatedform.IraqiCalculated_50)
+      this.listIraqiCalculated.push({
+        currencyId: 1,
+        value: IraqiCalculatedform.IraqiCalculated_50,
+      });
+    if (IraqiCalculatedform.IraqiCalculated_25)
+      this.listIraqiCalculated.push({
+        currencyId: 2,
+        value: IraqiCalculatedform.IraqiCalculated_25,
+      });
+    if (IraqiCalculatedform.IraqiCalculated_10)
+      this.listIraqiCalculated.push({
+        currencyId: 3,
+        value: IraqiCalculatedform.IraqiCalculated_10,
+      });
+    if (IraqiCalculatedform.IraqiCalculated_5)
+      this.listIraqiCalculated.push({
+        currencyId: 4,
+        value: IraqiCalculatedform.IraqiCalculated_5,
+      });
+    if (IraqiCalculatedform.IraqiCalculated_1000)
+      this.listIraqiCalculated.push({
+        currencyId: 5,
+        value: IraqiCalculatedform.IraqiCalculated_1000,
+      });
+    if (IraqiCalculatedform.IraqiCalculated_500)
+      this.listIraqiCalculated.push({
+        currencyId: 6,
+        value: IraqiCalculatedform.IraqiCalculated_500,
+      });
+    if (IraqiCalculatedform.IraqiCalculated_250)
+      this.listIraqiCalculated.push({
+        currencyId: 7,
+        value: IraqiCalculatedform.IraqiCalculated_250,
+      });
+    console.log(this.listIraqiCalculated);
+
+    let frodString = '';
+    this.listfrod.forEach((dd) => {
+      frodString += `{ currencyId:${dd.currencyId} value:${dd.value} }`;
+    });
+    if (this.listfrod.length > 0) {
+      frodString = `Faked_Logs:[${frodString}] ,`;
+    }
+
+
+    let CalculatedString = '';
+    this.listIraqiCalculated.forEach((dd) => {
+      CalculatedString += `{ currencyId:${dd.currencyId} value:${dd.value} }`;
+    });
+    if (this.listIraqiCalculated.length > 0) {
+      CalculatedString = `Iraqicalculated_Logs:[${CalculatedString}] ,`;
+    }
+    let OneStat = ` {id:0,workingdate:"${this.formReactiveForms.value.workingdate}",
+            currencyId:${this.CurID},
+            achieved:${this.formReactiveForms.value.achieved},
+            loss:${this.formReactiveForms.value.loss},
+            unIraqiCalculated:${this.formReactiveForms.value.UnIraqiCalculated},
+            unIraqiCalculated_Details: "${this.formReactiveForms.value.unIraqiCalculated_Details}",
+            extra: ${this.formReactiveForms.value.extra},
+            unacceptable: ${this.formReactiveForms.value.unacceptable},
+            auger: ${this.formReactiveForms.value.auger},
+            buried: ${this.formReactiveForms.value.buried},
+            cashier: "${this.formReactiveForms.value.cashier}",
+            notes: "${this.formReactiveForms.value.notes}",
+            userId:1,
+            ${frodString}
+            ${CalculatedString} 
+          }`;
+
+
+
+    console.log(OneStat);
+this.listStatments.push(OneStat)
+
+
+
     const tag = document.getElementById(tr);
+    const cell0 = document.createElement('td');
     const cell1 = document.createElement('td');
     const cell2 = document.createElement('td');
     const cell3 = document.createElement('td');
@@ -230,6 +308,9 @@ export class TableComponent implements OnInit {
     const cell6 = document.createElement('td');
     const cell7 = document.createElement('td');
     const cell8 = document.createElement('td');
+    const cellText0 = document.createTextNode(
+      `${this.formReactiveForms.value.workingdate}`
+    );
     const cellText1 = document.createTextNode(
       `${this.formReactiveForms.value.achieved}`
     );
@@ -254,6 +335,8 @@ export class TableComponent implements OnInit {
     const cellText8 = document.createTextNode(
       `${this.formReactiveForms.value.notes}`
     );
+    cell0.appendChild(cellText0);
+    document.getElementById(tr).appendChild(cell0);
     cell1.appendChild(cellText1);
     document.getElementById(tr).appendChild(cell1);
     cell2.appendChild(cellText2);
@@ -272,135 +355,43 @@ export class TableComponent implements OnInit {
     document.getElementById(tr).appendChild(cell8);
     console.log(tag);
 
-    let frodform = this.formReactiveForms.value.forged;
-    this.listfrod = [];
-    if (frodform.forged_50 > 0)
-      this.listfrod.push({ cid: 1, value: frodform.forged_50 });
-    if (frodform.forged_25 > 0)
-      this.listfrod.push({ cid: 2, value: frodform.forged_25 });
-    if (frodform.forged_10 > 0)
-      this.listfrod.push({ cid: 3, value: frodform.forged_10 });
-    if (frodform.forged_5 > 0)
-      this.listfrod.push({ cid: 4, value: frodform.forged_5 });
-    if (frodform.forged_1000 > 0)
-      this.listfrod.push({ cid: 5, value: frodform.forged_1000 });
-    if (frodform.forged_500 > 0)
-      this.listfrod.push({ cid: 6, value: frodform.forged_500 });
-    if (frodform.forged_250 > 0)
-      this.listfrod.push({ cid: 7, value: frodform.forged_250 });
-
-    let IraqiCalculatedform = this.formReactiveForms.value.IraqiCalculated;
-    this.listIraqiCalculated = [];
-    if (IraqiCalculatedform.IraqiCalculated_50)
-      this.listIraqiCalculated.push({
-        cid: 1,
-        value: IraqiCalculatedform.IraqiCalculated_50,
-      });
-    if (IraqiCalculatedform.IraqiCalculated_25)
-      this.listIraqiCalculated.push({
-        cid: 2,
-        value: IraqiCalculatedform.IraqiCalculated_25,
-      });
-    if (IraqiCalculatedform.IraqiCalculated_10)
-      this.listIraqiCalculated.push({
-        cid: 3,
-        value: IraqiCalculatedform.IraqiCalculated_10,
-      });
-    if (IraqiCalculatedform.IraqiCalculated_5)
-      this.listIraqiCalculated.push({
-        cid: 4,
-        value: IraqiCalculatedform.IraqiCalculated_5,
-      });
-    if (IraqiCalculatedform.IraqiCalculated_1000)
-      this.listIraqiCalculated.push({
-        cid: 5,
-        value: IraqiCalculatedform.IraqiCalculated_1000,
-      });
-    if (IraqiCalculatedform.IraqiCalculated_500)
-      this.listIraqiCalculated.push({
-        cid: 6,
-        value: IraqiCalculatedform.IraqiCalculated_500,
-      });
-    if (IraqiCalculatedform.IraqiCalculated_250)
-      this.listIraqiCalculated.push({
-        cid: 7,
-        value: IraqiCalculatedform.IraqiCalculated_250,
-      });
-
-    let IraqiUnCalculatedform = this.formReactiveForms.value.IraqiUnCalculated;
-    this.listIraqiUnCalculated = [];
-    if (IraqiUnCalculatedform.IraqiUnCalculated_50)
-      this.listIraqiUnCalculated.push({
-        cid: 1,
-        value: IraqiUnCalculatedform.IraqiUnCalculated_50,
-      });
-    if (IraqiUnCalculatedform.IraqiUnCalculated_25)
-      this.listIraqiUnCalculated.push({
-        cid: 2,
-        value: IraqiUnCalculatedform.IraqiUnCalculated_25,
-      });
-    if (IraqiUnCalculatedform.IraqiUnCalculated_10)
-      this.listIraqiUnCalculated.push({
-        cid: 3,
-        value: IraqiUnCalculatedform.IraqiUnCalculated_10,
-      });
-    if (IraqiUnCalculatedform.IraqiUnCalculated_50)
-      this.listIraqiUnCalculated.push({
-        cid: 4,
-        value: IraqiUnCalculatedform.IraqiUnCalculated_5,
-      });
-    if (IraqiUnCalculatedform.IraqiUnCalculated_50)
-      this.listIraqiUnCalculated.push({
-        cid: 5,
-        value: IraqiUnCalculatedform.IraqiUnCalculated_1000,
-      });
-    if (IraqiUnCalculatedform.IraqiUnCalculated_50)
-      this.listIraqiUnCalculated.push({
-        cid: 6,
-        value: IraqiUnCalculatedform.IraqiUnCalculated_500,
-      });
-    if (IraqiUnCalculatedform.IraqiUnCalculated_50)
-      this.listIraqiUnCalculated.push({
-        cid: 7,
-        value: IraqiUnCalculatedform.IraqiUnCalculated_250,
-      });
-
-    this.all2 = [
-      {
-        id: 1,
-        invoiceId: 1,
-        Currency: {
-          id: this.currency[0].id,
-          name: this.currency[0].name,
-        },
-        currencyId: this.CurID,
-        userId: 2,
-        workingdate: this.formReactiveForms.value.workingdate,
-        achieved: this.formReactiveForms.value.achieved,
-        loss: this.formReactiveForms.value.loss,
-        forged: this.listfrod,
-        IraqiCalculated: this.listIraqiCalculated,
-        IraqiUnCalculated: this.listIraqiUnCalculated,
-        UnIraqiCalculated: this.formReactiveForms.value.UnIraqiCalculated,
-        UnIraqiUnCalculated: this.formReactiveForms.value.UnIraqiUnCalculated,
-        unIraqiCalculated_Details:
-          this.formReactiveForms.value.unIraqiCalculated_Details,
-        unIraqiUnCalculated_Details:
-          this.formReactiveForms.value.unIraqiUnCalculated_Details,
-        extra: this.formReactiveForms.value.extra,
-        unacceptable: this.formReactiveForms.value.unacceptable,
-        auger: this.formReactiveForms.value.auger,
-        buried: this.formReactiveForms.value.buried,
-        cashier: this.formReactiveForms.value.cashier,
-        notes: this.formReactiveForms.value.cashier,
-      },
-    ];
-    console.log(this.all2);
+    //     this.all2 = [
+    //       {
+    //         id: 1,
+    //         invoiceId: 1,
+    //         Currency: {
+    //           id: this.currency[0].id,
+    //           name: this.currency[0].name,
+    //         },
+    //         currencyId: this.CurID,
+    //         userId: 1,
+    //         workingdate: this.formReactiveForms.value.workingdate,
+    //         achieved: this.formReactiveForms.value.achieved,
+    //         loss: this.formReactiveForms.value.loss,
+    //         forged: this.listfrod,
+    //         IraqiCalculated: this.listIraqiCalculated,
+    //         UnIraqiCalculated: this.formReactiveForms.value.UnIraqiCalculated,
+    //         unIraqiCalculated_Details:this.formReactiveForms.value.unIraqiCalculated_Details,
+    //         extra: this.formReactiveForms.value.extra,
+    //         unacceptable: this.formReactiveForms.value.unacceptable,
+    //         auger: this.formReactiveForms.value.auger,
+    //         buried: this.formReactiveForms.value.buried,
+    //         cashier: this.formReactiveForms.value.cashier,
+    //         notes: this.formReactiveForms.value.cashier,
+    //       },
+    //     ];
+    //     console.log(this.all2);
+    
     this.modalService.dismissAll();
+    this.formReactiveForms.reset();
+
   }
 
   get achived() {
     return this.formReactiveForms.get('achieved');
+  }
+  get workingdate() {
+    return this.formReactiveForms.get('workingdate');
   }
 
   onItemSelect(item: any) {
@@ -410,5 +401,4 @@ export class TableComponent implements OnInit {
     this.showModal = !this.showModal;
     console.log((this.selectedId = name));
   }
-
 }

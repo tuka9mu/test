@@ -1,5 +1,5 @@
 <div class="h-full mt-14 mb-10 md:mr-48 mr-14">
-  <form [formGroup]="myForm" (ngSubmit)="save2()">
+  <form [formGroup]="myForm" (ngSubmit)="saveInvoice()">
     <div class="w-full flex justfiy-end">
       <div class="m-3">
         <label class="text-sm text-right font-medium text-gray-900 block">
@@ -50,6 +50,7 @@
               class="text-sm font-semibold tracking-wide text-center text-white uppercase border-b bg-[#f97316]"
             >
               <th>الفئة</th>
+              <th>تاريخ الايداع</th>
               <th>المنجزة</th>
               <th>النقصان</th>
               <th>الزيادة</th>
@@ -117,11 +118,13 @@
                       </svg>
 
                       <div>
+                        <img [src]="cat.path">
                         <form
                           [formGroup]="formReactiveForms"
-                          (ngSubmit)="save()"
+                          (ngSubmit)="saveStatment()"
                         >
-                          <div class="grid gap-2 lg:grid-cols-3 p-2 text-sm">
+                          <div class="grid gap-2 lg:grid-cols-3 p-2 text-sm mt-3">
+                            
                               <div>
                                     <label
                                       class="mb-1 text-sm font-medium text-gray-700"
@@ -138,7 +141,10 @@
                                       required=""
                                     ></textarea>
                                     <span
-                                    
+                                    *ngIf="
+                                      workingdate.invalid &&
+                                      (workingdate.dirty || workingdate.touched)
+                                    "
                                     class="text-red-500 text-right"
                                     >يرجى ادخال الحقل اعلاه</span
                                   >
@@ -172,7 +178,6 @@
                             </div>
                             <div>
                               <label
-                                for="UnIraqiCalculated"
                                 class="mb-1 text-sm font-medium text-gray-700"
                                 >عدد اوراق النقص
                               </label>
@@ -326,7 +331,7 @@
                                   class="text-xs"
                                   formGroupName="IraqiCalculated"
                                 >
-                                  <tr class="bg-white">
+                                  <tr  *ngIf="test(1)" class="bg-white">
                                     <!-- *ngFor="let cat of products; let i = index" -->
                                     <td class="p-1">50,000</td>
                                     <input
@@ -340,7 +345,7 @@
                                       required=""
                                     />
                                   </tr>
-                                  <tr class="bg-white">
+                                  <tr *ngIf="test(2)"  class="bg-white">
                                     <td class="p-1">25,000</td>
                                     <input
                                       formControlName="IraqiCalculated_25"
@@ -353,7 +358,7 @@
                                       required=""
                                     />
                                   </tr>
-                                  <tr class="bg-white">
+                                  <tr  *ngIf="test(3)"  class="bg-white">
                                     <td class="p-1">10,000</td>
                                     <input
                                       formControlName="IraqiCalculated_10"
@@ -366,7 +371,7 @@
                                       required=""
                                     />
                                   </tr>
-                                  <tr class="bg-white">
+                                  <tr *ngIf="test(4)"  class="bg-white">
                                     <td class="p-1">5000</td>
                                     <input
                                       formControlName="IraqiCalculated_5"
@@ -379,7 +384,7 @@
                                       required=""
                                     />
                                   </tr>
-                                  <tr class="bg-white">
+                                  <tr *ngIf="test(5)"  class="bg-white">
                                     <td class="p-1">1000</td>
                                     <input
                                       formControlName="IraqiCalculated_1000"
@@ -392,7 +397,7 @@
                                       required=""
                                     />
                                   </tr>
-                                  <tr class="bg-white">
+                                  <tr *ngIf="test(6)"  class="bg-white">
                                     <td class="p-1">500</td>
                                     <input
                                       formControlName="IraqiCalculated_500"
@@ -405,7 +410,7 @@
                                       required=""
                                     />
                                   </tr>
-                                  <tr class="bg-white">
+                                  <tr *ngIf="test(7)"  class="bg-white">
                                     <td class="p-1">250</td>
                                     <input
                                       formControlName="IraqiCalculated_250"
@@ -639,7 +644,7 @@
                             class="flex items-center justify-end p-3 border-t border-solid border-slate-200 rounded-b"
                           >
                             <button
-                              [disabled]="achived.invalid && achived.touched"
+                              *ngIf="achived.valid && achived.touched && workingdate.valid && workingdate.touched"
                               class="bg-[#1e3a8a] text-white font-bold uppercase text-sm px-6 py-3 rounded shadow focus:outline-none mr-1 mb-1"
                               type="submit"
                             >

@@ -2,7 +2,7 @@ import { gql } from 'apollo-angular';
 
 const GET_INVOICE = gql`
   {
-    GetInvoice(data: 12) {
+    GetInvoice(data: 1) {
       id
       Bank {
         id
@@ -12,9 +12,10 @@ const GET_INVOICE = gql`
         id
         name
       }
-      workingdate
+
       Statement {
         id
+        workingdate
         Currency {
           id
           name
@@ -23,9 +24,7 @@ const GET_INVOICE = gql`
         achieved
         loss
         unIraqiCalculated
-        unIraqiUnCalculated
         unIraqiCalculated_Details
-        unIraqiUnCalculated_Details
         extra
         unacceptable
         auger
@@ -38,11 +37,6 @@ const GET_INVOICE = gql`
           value
         }
         Iraqicalculated_Logs {
-          id
-          currencyId
-          value
-        }
-        Iraqiuncalculated_Logs {
           id
           currencyId
           value
@@ -60,23 +54,23 @@ const GET_INVOICES = gql`
           id
           name
         }
-        Site{
+        Site {
           id
           name
         }
-        siteId
-        workingdate
+        
         Statement {
           id
-          invoiceId
-          currencyId
+          workingdate
+          Currency {
+            id
+            name
+          }
           userId
           achieved
           loss
           unIraqiCalculated
-          unIraqiUnCalculated
           unIraqiCalculated_Details
-          unIraqiUnCalculated_Details
           extra
           unacceptable
           auger
@@ -93,20 +87,13 @@ const GET_INVOICES = gql`
             currencyId
             value
           }
-          Iraqiuncalculated_Logs {
-            id
-            currencyId
-            value
-          }
+      
         }
         createdAt
         updatedAt
         isActive
       }
     }
-    
 `;
 
-
-export { GET_INVOICE ,GET_INVOICES
-};
+export { GET_INVOICE, GET_INVOICES };
