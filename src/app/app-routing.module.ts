@@ -7,24 +7,37 @@ import { StatmentsComponent } from './components/statments/statments.component';
 import { LoginComponent } from './components/auth/login/login.component';
 import { AuthService } from './components/auth/Service/auth.service';
 import { AuthGuard } from './components/auth/guard/auth.guard';
+import { DashboardComponent } from './components/dashboard/dashboard.component';
+import { RouteGuard } from './components/auth/guard/route.guard';
 const Approutes: Routes = [
   {
     path: '',
     component: LoginComponent,
-    children: [ {
-            path: 'auth',
-            loadChildren: () => import('./components/auth/auth.module').then(m => m.AuthModule)
-        }
-    ]
-},
-      { path: 'statment', component: StatmentsComponent, canActivate:[AuthGuard]},
-      { path: 'main', component: TableComponent, canActivate:[AuthGuard]},
-      { path: 'report', component: ReportComponent},
-      { path: 'bank', component: BankComponent},
+    children: [
+      {
+        path: 'auth',
+        loadChildren: () =>
+          import('./components/auth/auth.module').then((m) => m.AuthModule),
+      },
+    ],
+  },
+
+  { path: 'statment', component: StatmentsComponent, canActivate: [AuthGuard] },
+  {
+    path: 'main',
+    component: TableComponent,
+    canActivate: [AuthGuard,RouteGuard],
+    data:{
+        role:'SuperAdmin'
+    },
+  },
+  { path: 'dashboard', component: DashboardComponent, canActivate: [AuthGuard] },
+  { path: 'report', component: ReportComponent },
+  { path: 'bank', component: BankComponent },
 ];
 //
 @NgModule({
   imports: [RouterModule.forRoot(Approutes)],
-  exports: [RouterModule]
+  exports: [RouterModule],
 })
-export class AppRoutingModule { }
+export class AppRoutingModule {}

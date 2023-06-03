@@ -46,6 +46,61 @@ const GET_INVOICE = gql`
   }
 `;
 
+
+const GET_INVOICESPEC = gql`
+  {
+    GetInvoiceSpec(data: 1) {
+      id
+      Site {
+        id
+        name
+      }
+      Bank {
+        id
+        name
+      }
+      StatusSort{
+        id
+        Display
+        Role{
+          id
+          name
+        }
+      }
+      Statement {
+        id
+        workingdate
+        Currency {
+          id
+          name
+        }
+        userId
+        achieved
+        loss
+        unIraqiCalculated
+        unIraqiCalculated_Details
+        extra
+        unacceptable
+        auger
+        buried
+        cashier
+        notes
+        Faked_Logs {
+          id
+          currencyId
+          value
+        }
+        Iraqicalculated_Logs {
+          id
+          currencyId
+          value
+        }
+      }
+    }
+  }
+`;
+
+
 const GET_INVOICES = gql`
 {
       GetInvoices {
@@ -58,7 +113,7 @@ const GET_INVOICES = gql`
           id
           name
         }
-        
+
         Statement {
           id
           workingdate
@@ -87,7 +142,7 @@ const GET_INVOICES = gql`
             currencyId
             value
           }
-      
+
         }
         createdAt
         updatedAt
@@ -96,4 +151,4 @@ const GET_INVOICES = gql`
     }
 `;
 
-export { GET_INVOICE, GET_INVOICES };
+export { GET_INVOICE, GET_INVOICES,GET_INVOICESPEC };

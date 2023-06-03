@@ -20,6 +20,7 @@ import { CommonModule } from '@angular/common';
 import { BankComponent } from './components/banks/bank.component';
 import { LoginComponent } from './components/auth/login/login.component';
 import { AuthGuard } from './components/auth/guard/auth.guard';
+import { DashboardComponent } from './components/dashboard/dashboard.component';
 @NgModule({
     declarations: [
         AppComponent,
@@ -27,7 +28,8 @@ import { AuthGuard } from './components/auth/guard/auth.guard';
         TableComponent,
         ReportComponent,
         BankComponent,
-        StatmentsComponent
+        StatmentsComponent,
+        DashboardComponent
     ],
     providers: [AuthGuard],
     bootstrap: [AppComponent],

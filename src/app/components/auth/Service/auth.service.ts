@@ -9,7 +9,6 @@ import { User } from 'src/app/model/User';
 })
 export class AuthService {
   currentUser = {};
-
   UserRole: String[] = [];
 
   private apollo: ApolloBase;
@@ -63,7 +62,7 @@ export class AuthService {
         '----------------------------------------------------------------------------'
       );
       console.log(this.currentUser);
-      this.router.navigate(['/main']);
+      this.router.navigate(['/dashboard']);
     });
   }
 

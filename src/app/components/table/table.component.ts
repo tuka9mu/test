@@ -77,9 +77,9 @@ export class TableComponent implements OnInit {
   all: Invoice[] = [];
   all2: Statement[] = [];
   currency: Currency[] = [];
-  test(aaCurID: any) { 
+  test(aaCurID: any) {
        return this.CurID != aaCurID;
- 
+
     }
   openXl(longContent: any, c: any) {
     console.log(c);
@@ -170,14 +170,14 @@ export class TableComponent implements OnInit {
     }
 
     console.log(StatementString);
-   
+
     let Create_Invoice = `
         mutation{
           SetInvoice(data:{
             id:0,
             bankId:${this.selectedItems[0]?.id},
             siteId:1,
-            ${StatementString}
+            Statement:${StatementString}
         })
         {
           id
@@ -288,7 +288,7 @@ export class TableComponent implements OnInit {
             notes: "${this.formReactiveForms.value.notes}",
             userId:1,
             ${frodString}
-            ${CalculatedString} 
+            ${CalculatedString}
           }`;
 
 
@@ -381,7 +381,7 @@ this.listStatments.push(OneStat)
     //       },
     //     ];
     //     console.log(this.all2);
-    
+
     this.modalService.dismissAll();
     this.formReactiveForms.reset();
 
